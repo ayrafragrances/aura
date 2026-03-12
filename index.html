@@ -5,187 +5,248 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AYRA | The Imperial Aura</title>
     <style>
-        /* AYRA FRAGRANCES - SOVEREIGN V6.0 
-           THEME: FLAMBOYANT CRIMSON & IMPERIAL GOLD
+        /* AYRA FRAGRANCES - IMPERIAL ENGINE V3.1 
+           ADJUSTMENTS: Typography scale refinement
         */
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,900&family=Montserrat:wght@100;300;600;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@100;300;400&display=swap');
 
         :root {
             --royal-gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
-            --vibrant-crimson: #7a0000;
-            --deep-wine: #3d0000;
-            --electric-gold: #ffdf00;
-            --transition-ultra: 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            --gold-soft: #d4af37;
+            --deep-obsidian: #030101;
+            --glass-gold: rgba(191, 149, 63, 0.15);
+            --transition-smooth: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* 1. KINETIC FLAMBOYANT BACKGROUND */
+        /* 1. GLOBAL ARCHITECTURE */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         
         body, html { 
             width: 100%; height: 100%; 
-            background: var(--deep-wine);
+            background-color: var(--deep-obsidian);
             color: #fff;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Playfair Display', serif;
             overflow-x: hidden;
+            cursor: default;
         }
 
+        /* 2. ENVIRONMENTAL ENGINE */
         .background-engine {
-            position: fixed; inset: 0;
+            position: fixed; top: -5%; left: -5%; width: 110%; height: 110%;
             z-index: -2;
-            /* Bold, flamboyant maroon-crimson mesh */
-            background: 
-                radial-gradient(circle at 20% 20%, #9e0000 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, #5e0b0b 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, var(--vibrant-crimson) 0%, var(--deep-wine) 100%);
-            animation: backgroundShift 15s infinite alternate ease-in-out;
+            /* UPDATED BACKGROUND IMAGE */
+            background-image: url('https://i.postimg.cc/05mRcfNq/Untitled-design.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.3) saturate(0.8) contrast(1.1);
+            will-change: transform;
         }
 
-        .gold-overlay {
+        .light-leak {
+            position: fixed; inset: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(191,149,63,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+            animation: lightPulse 10s infinite alternate;
+        }
+
+        .particles {
             position: fixed; inset: 0;
             background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.2; z-index: -1;
-            filter: invert(1) brightness(2);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
         }
 
-        @keyframes backgroundShift {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
+        .divine-vignette {
+            position: fixed; inset: 0; z-index: 0;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.98) 100%);
+            pointer-events: none;
         }
 
-        /* 2. TYPOGRAPHY & HEADER */
+        /* 3. SCROLL PROGRESS */
+        #scroll-thread {
+            position: fixed; top: 0; left: 0; width: 0%; height: 1px;
+            background: var(--royal-gold); z-index: 2001;
+            box-shadow: 0 0 10px rgba(191, 149, 63, 0.8);
+        }
+
+        /* 4. MAIN CONTAINER */
         .zenith-wrapper {
             width: 100%; min-height: 100vh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 40px 20px; position: relative; z-index: 10;
+            padding: 60px 20px; position: relative; z-index: 10;
         }
 
+        /* 5. IMPERIAL BRANDING */
         .imperial-header {
-            text-align: center; margin-bottom: 8vh;
+            text-align: center; 
+            margin-bottom: clamp(40px, 10vh, 80px);
+            opacity: 0; transform: translateY(20px);
+            animation: revealEntrance 2s forwards;
         }
 
         .brand-text {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 900; 
-            font-size: clamp(1.2rem, 3vw, 1.8rem); 
-            letter-spacing: clamp(12px, 2.5vw, 25px); 
+            font-weight: 300; 
+            /* INCREASED FONT SIZE */
+            font-size: clamp(0.8rem, 2vw, 1.1rem); 
+            letter-spacing: clamp(10px, 2vw, 20px); 
             text-transform: uppercase; 
             color: #fcf6ba; 
-            display: block; margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(191, 149, 63, 0.6);
+            margin-bottom: 25px; 
+            display: block;
+            text-shadow: 0 0 10px rgba(191, 149, 63, 0.4);
         }
 
         .main-title {
             font-family: 'Cinzel', serif; 
-            font-size: clamp(1.8rem, 6vw, 2.8rem);
-            font-weight: 900; 
-            letter-spacing: clamp(8px, 3vw, 18px);
-            text-transform: uppercase; 
-            background: var(--royal-gold);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
+            font-size: clamp(2rem, 9vw, 4.5rem);
+            font-weight: 900; letter-spacing: clamp(10px, 4vw, 30px);
+            text-transform: uppercase; line-height: 1;
+            background: var(--royal-gold); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
         }
 
-        /* 3. FLAMBOYANT CARDS */
+        /* 6. KINETIC ART CARDS */
         .aura-grid {
-            display: flex; gap: clamp(30px, 5vw, 60px);
+            display: flex; gap: clamp(30px, 5vw, 80px);
             flex-wrap: wrap; justify-content: center;
-            width: 100%; max-width: 1200px;
+            perspective: 2000px; width: 100%; max-width: 1200px;
         }
 
         .aura-card {
-            width: clamp(280px, 35vw, 380px); height: 550px;
+            width: clamp(280px, 40vw, 380px); 
+            height: clamp(450px, 60vw, 580px);
             position: relative; overflow: hidden;
-            background: rgba(0,0,0,0.3); border: 2px solid rgba(191, 149, 63, 0.4);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            cursor: pointer; transition: var(--transition-ultra);
+            background-color: #000; border: 1px solid rgba(191, 149, 63, 0.15);
+            transition: var(--transition-smooth);
+            transform-style: preserve-3d;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.9);
+            cursor: pointer;
+        }
+
+        .aura-card::after {
+            content: ""; position: absolute; inset: 0;
+            background: linear-gradient(125deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+            transform: translateX(-100%);
+            transition: 0.6s; z-index: 10;
         }
 
         .aura-card:hover {
-            transform: translateY(-15px) rotateZ(1deg);
-            border-color: #ffdf00;
-            box-shadow: 0 0 40px rgba(255, 223, 0, 0.3);
+            border-color: #fcf6ba;
+            transform: translateY(-20px) rotateX(5deg) rotateY(-5deg);
+            box-shadow: 0 60px 120px rgba(191, 149, 63, 0.2);
         }
+
+        .aura-card:hover::after { transform: translateX(100%); }
 
         .card-media {
             width: 100%; height: 100%; background-size: cover; background-position: center;
-            opacity: 0.7; transition: 1.5s var(--transition-ultra);
+            opacity: 0.6; transform: scale(1);
+            transition: 1.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .aura-card:hover .card-media { opacity: 1; transform: scale(1.1); }
+        .aura-card:hover .card-media {
+            opacity: 1; transform: scale(1.1);
+        }
 
         .female-bg { background-image: url('https://i.postimg.cc/g01369tz/Gemini-Generated-Image-usj8m5usj8m5usj8.png'); }
         .male-bg { background-image: url('https://i.postimg.cc/9fsyq3gM/Gemini-Generated-Image-z4wx9bz4wx9bz4wx.png'); }
 
         .card-label {
-            position: absolute; bottom: 0; width: 100%; padding: 40px 20px;
-            text-align: center; background: linear-gradient(transparent, #000);
-            font-family: 'Cinzel', serif; font-size: 1.4rem; letter-spacing: 10px;
-            font-weight: 900; color: #fff;
+            position: absolute; bottom: 0; width: 100%; padding: 60px 20px;
+            text-align: center; background: linear-gradient(transparent, rgba(0,0,0,1));
+            font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 12px; color: #fff;
+            z-index: 15;
         }
 
-        /* 4. THE REVEAL PORTAL (suspense mode) */
+        /* 7. REVEAL PORTAL (The Chamber) */
         #reveal-portal {
             display: none; position: fixed; inset: 0;
             z-index: 3000; align-items: center; justify-content: center;
-            background: radial-gradient(circle, #4a0000 0%, #000 100%);
-            opacity: 0; transition: opacity 0.8s ease;
-            backdrop-filter: blur(20px);
+            background: rgba(0,0,0,0.95); padding: 20px; opacity: 0; 
+            transition: opacity 1s ease;
+            backdrop-filter: blur(10px);
         }
 
         .imperial-chamber {
-            width: 90%; max-width: 800px; text-align: center;
-            padding: 60px 30px; border: 1px solid var(--electric-gold);
-            background: rgba(0,0,0,0.9);
-            box-shadow: 0 0 100px rgba(191, 149, 63, 0.2);
+            width: 100%; max-width: 800px;
+            text-align: center; position: relative;
+            padding: 60px 30px;
+            border: 1px solid rgba(191, 149, 63, 0.2);
+            background: radial-gradient(circle at center, #080808 0%, #000 100%);
+            box-shadow: 0 0 100px rgba(191, 149, 63, 0.1);
+            animation: chamberScale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .aura-result {
-            font-size: clamp(1.2rem, 5vw, 2.2rem); 
-            font-family: 'Playfair Display', serif;
-            font-style: italic; margin-bottom: 50px;
-            color: #fcf6ba; line-height: 1.5;
+            /* DECREASED AURA TEXT SIZE */
+            font-size: clamp(1.1rem, 4vw, 1.8rem); 
+            font-weight: 400; font-style: italic;
+            margin-bottom: 50px; color: #fff; line-height: 1.6;
+            background: linear-gradient(to bottom, #fff, #b38728);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* 5. VIBRANT BUTTONS */
+        /* 8. CTA ELEMENTS */
         .btn-zenith {
-            display: inline-block; padding: 22px 45px;
+            display: inline-block; padding: 20px 40px;
             background: var(--royal-gold); color: #000 !important;
-            text-decoration: none; font-family: 'Montserrat', sans-serif;
-            font-weight: 900; font-size: 0.8rem; letter-spacing: 4px;
-            text-transform: uppercase; transition: 0.4s;
-            cursor: pointer; border: none;
+            text-decoration: none; font-family: 'Cinzel', serif;
+            font-weight: 900; font-size: 0.8rem; letter-spacing: 5px;
+            text-transform: uppercase; transition: 0.5s;
+            position: relative; overflow: hidden;
         }
 
         .btn-zenith:hover {
-            transform: scale(1.05); background: #fff;
-            box-shadow: 0 0 30px rgba(255,255,255,0.4);
+            transform: scale(1.05); letter-spacing: 8px;
+            background: #fff;
         }
 
         .reroll {
             margin-top: 40px; background: none; border: none;
-            color: #ffdf00; font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase; letter-spacing: 8px; font-size: 0.7rem;
-            font-weight: 900; cursor: pointer; opacity: 0.6;
+            color: rgba(255, 255, 255, 0.25); font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase; letter-spacing: 6px; font-size: 0.6rem;
+            cursor: pointer; transition: 0.4s;
+        }
+        .reroll:hover { color: #fff; letter-spacing: 10px; }
+
+        /* 9. KEYFRAME LIBRARY */
+        @keyframes lightPulse {
+            0% { opacity: 0.3; } 100% { opacity: 0.7; }
+        }
+        @keyframes revealEntrance {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes chamberScale {
+            from { transform: scale(0.95) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
-        .reroll:hover { opacity: 1; letter-spacing: 12px; }
-
         @media (max-width: 768px) {
-            .aura-card { width: 85vw; height: 500px; }
-            .brand-text { font-size: 1rem; letter-spacing: 8px; }
-            .main-title { font-size: 1.6rem; }
+            .brand-text { font-size: 0.8rem; letter-spacing: 6px; }
+            .aura-result { font-size: 1.2rem; }
+            .aura-card { width: 88vw; height: 130vw; }
         }
     </style>
 </head>
 <body>
 
-    <div class="background-engine"></div>
-    <div class="gold-overlay"></div>
+    <div class="background-engine" id="bgEngine"></div>
+    <div class="light-leak"></div>
+    <div class="particles"></div>
+    <div class="divine-vignette"></div>
+    <div id="scroll-thread"></div>
 
     <div class="zenith-wrapper">
         <header class="imperial-header">
             <span class="brand-text">AYRA FRAGRANCES</span>
-            <h1 class="main-title">Discover your Aura</h1>
+            <h1 class="main-title">DISCOVER YOUR<br>AURA</h1>
         </header>
 
         <main class="aura-grid">
@@ -203,43 +264,50 @@
         <div id="reveal-portal">
             <div class="imperial-chamber">
                 <div id="aura-text" class="aura-result">Inhaling your soul essence...</div>
-                <div id="cta-container" style="display: none;">
-                    <a href="https://linktr.ee/ayrafragrances" class="btn-zenith">ENTER THE FRAGRANCE WONDERLAND</a>
-                    <br>
-                    <button class="reroll" onclick="window.location.reload()">REDEFINE DESTINY</button>
-                </div>
+                <a href="https://linktr.ee/ayrafragrances" class="btn-zenith">ENTER THE WONDERLAND</a>
+                <br>
+                <button class="reroll" onclick="window.location.reload()">REDEFINE DESTINY</button>
             </div>
         </div>
     </div>
 
     <script>
+        // 1. SCROLL THREAD TRACKER
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-thread").style.width = scrolled + "%";
+        });
+
+        // 2. AURA FETCH ENGINE
         const scriptURL = "https://script.google.com/macros/s/AKfycbzdYbobuvTwytAkM0TI-bLW6kxX7JMwNQdT2c-X9QNMv2aXbShRE-g3o8IRN9sAg2Dh/exec";
 
         function fetchAura(gender) {
             const portal = document.getElementById('reveal-portal');
             const output = document.getElementById('aura-text');
-            const cta = document.getElementById('cta-container');
             
-            // Show Portal & Reset state
             portal.style.display = 'flex';
             setTimeout(() => portal.style.opacity = '1', 50);
-            output.innerText = "Inhaling your soul essence...";
-            cta.style.display = 'none';
 
-            // Start API call immediately
             fetch(`${scriptURL}?gender=${gender}`)
                 .then(r => r.text())
                 .then(data => {
-                    // Dramatic delay for the "ritual"
-                    setTimeout(() => {
-                        output.innerText = `"${data}"`;
-                        cta.style.display = 'block';
-                    }, 2500);
+                    output.innerText = `"${data}"`;
                 })
                 .catch(err => {
                     output.innerText = "THE VOID IS SILENT. REFRESH.";
-                    cta.style.display = 'block';
+                    console.error('Imperial Error:', err);
                 });
+        }
+
+        // 3. LOW-OVERHEAD PARALLAX
+        if (window.matchMedia("(pointer: fine)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                const x = (window.innerWidth / 2 - e.pageX) / 80;
+                const y = (window.innerHeight / 2 - e.pageY) / 80;
+                document.getElementById('bgEngine').style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+            });
         }
     </script>
 </body>
