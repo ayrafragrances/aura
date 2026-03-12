@@ -3,74 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ayra Fragrances | The Aura Reveal</title>
+    <title>Ayra Fragrances | The Royal Aura</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,900;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;900&family=Playfair+Display:ital,wght@0,900;1,900&display=swap');
 
         :root {
-            --gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
-            --royal-glow: rgba(212, 175, 55, 0.3);
+            --gold-main: #bf953f;
+            --gold-bright: #fcf6ba;
+            --luxury-bg: #0a0202;
         }
 
         body, html { 
             margin: 0; padding: 0; width: 100%; height: 100%; 
-            background: #050101; color: #d4af37; 
+            background: var(--luxury-bg); color: #d4af37; 
             font-family: 'Playfair Display', serif; 
             display: flex; align-items: center; justify-content: center; 
-            overflow: hidden; cursor: default;
+            overflow: hidden;
         }
 
-        /* DYNAMIC LUXURY BACKGROUND */
-        .bg-canvas {
+        /* EXTREME BACKGROUND: MOVING LUXURY NEBULA */
+        .bg-nebula {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #2a0808 0%, #050101 100%);
+            background: radial-gradient(circle at 50% 50%, #3d0e0e 0%, #0a0202 100%);
             z-index: -1;
         }
 
-        .gold-particles {
-            position: absolute; width: 100%; height: 100%;
-            background-image: radial-gradient(#d4af37 1px, transparent 1px);
-            background-size: 50px 50px; opacity: 0.1;
-            animation: moveParticles 20s linear infinite;
+        .gold-flare {
+            position: absolute; width: 150vw; height: 150vh;
+            background: radial-gradient(circle, rgba(191, 149, 63, 0.1) 0%, transparent 60%);
+            animation: rotateFlare 20s infinite linear;
         }
 
-        @keyframes moveParticles { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+        @keyframes rotateFlare { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        .container { text-align: center; width: 100%; z-index: 10; perspective: 1500px; }
+        .container { text-align: center; width: 100%; z-index: 10; perspective: 2000px; }
 
-        /* HEADER SECTION */
-        .brand-header { animation: fadeInDown 2s ease; margin-bottom: 60px; }
+        /* THE BRAND ENTRANCE */
+        .brand-entrance { animation: slideInFade 2.5s cubic-bezier(0.19, 1, 0.22, 1); }
         
-        .welcome-line {
-            font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 10px;
-            text-transform: uppercase; margin-bottom: 15px; color: #fcf6ba;
-            display: block; opacity: 0.7;
+        .welcome-msg {
+            font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 12px;
+            text-transform: uppercase; margin-bottom: 20px; color: #fcf6ba;
+            display: block; animation: shimmer 3s infinite alternate;
         }
 
         h1 { 
-            font-family: 'Cinzel', serif; letter-spacing: 18px; 
-            text-transform: uppercase; margin: 0;
-            background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            font-size: clamp(1.5rem, 6vw, 3.5rem); font-weight: 900;
-            filter: drop-shadow(0 0 20px rgba(191, 149, 63, 0.4));
-            animation: titlePulse 4s infinite alternate;
+            font-family: 'Cinzel', serif; letter-spacing: clamp(10px, 4vw, 25px); 
+            text-transform: uppercase; margin: 0; font-weight: 900;
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #aa771c 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            font-size: clamp(2rem, 8vw, 4rem);
+            filter: drop-shadow(0 0 30px rgba(191, 149, 63, 0.5));
         }
 
-        @keyframes titlePulse { from { transform: scale(1); } to { transform: scale(1.02); } }
-
-        /* THE ANIMATED AURA CARDS */
-        .card-wrapper { display: flex; gap: 50px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+        /* EXTREME 3D AURA CARDS */
+        .card-wrapper { display: flex; gap: 60px; flex-wrap: wrap; justify-content: center; margin-top: 60px; }
 
         .aura-card { 
-            width: 320px; height: 500px; 
-            border: 1px solid rgba(212, 175, 55, 0.4); 
+            width: clamp(260px, 45vw, 360px); height: clamp(400px, 65vw, 550px); 
+            border: 2px solid rgba(212, 175, 55, 0.6); 
             border-radius: 4px; overflow: hidden; position: relative; 
             display: flex; align-items: flex-end; cursor: pointer;
             background-size: cover; background-position: center; 
             transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
-            box-shadow: 0 30px 60px rgba(0,0,0,1);
+            box-shadow: 0 40px 80px rgba(0,0,0,1);
+            transform-style: preserve-3d;
+        }
+
+        /* THE HOVER "SHOCKWAVE" */
+        .aura-card:hover { 
+            transform: translateY(-30px) scale(1.05) rotateY(10deg); 
+            border-color: #fcf6ba;
+            box-shadow: 0 50px 120px rgba(191, 149, 63, 0.6);
         }
 
         .aura-card::before {
-            content: ""; position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(1
+            content: ""; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+            transform: skewX(-25deg); transition: 0.8s;
+        }
+
+        .aura-card:hover::before { left: 150%; }
+
+        .female-img { background-image: url('https://i.postimg.cc/g01369tz/Gemini-Generated-Image-usj8m5usj8m5usj8.png'); }
+        .male-img { background-image: url('https://i.postimg.cc/9fsyq3gM/Gemini-Generated-Image-z4wx9bz4wx9bz4wx.png'); }
+
+        .card-label { 
+            z-index: 2; font-family: 'Cinzel', serif; font-size: clamp(1.2rem, 3vw, 2rem); 
+            letter-spacing: 10px; color: #fff; width: 100%; text-align: center; 
+            padding: 40px 0; font-weight: 900;
+            background: linear-gradient(transparent, rgba(10,2,2,0.98));
+        }
+
+        /* REVEAL PAGE: THE CINEMATIC FINALE */
+        #reveal-ui { display: none; }
+        .reveal-chamber { 
+            width: 90%; max-width: 1100px; padding: 150px 50px; 
+            background: rgba(5, 1, 1, 0.98); backdrop-filter: blur(40px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 200px rgba(0,0,0,1);
+            animation: cinematicZoom 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .message-text { 
+            font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; 
+            margin-bottom: 80px; line-height: 1.1; font-style: italic;
+            background: linear-gradient(to bottom, #fff 0%, #d4af37 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+        }
+
+        /* THE IMPERIAL BUTTON */
+        .btn-luxury { 
+            display: inline-block; padding: 25px 90px; 
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #aa771c); 
+            color: #000 !important; text-decoration: none; font-weight: 900; 
+            letter-spacing: 8px; text-transform: uppercase; font-size: 1.2rem; 
+            font-family: 'Cinzel', serif; border: none;
+            transition: 0.5s; box-shadow: 0 10px 40px rgba(191, 149, 63, 0.4);
+        }
+
+        .btn-luxury:hover { 
+            transform: scale(1.1); letter-spacing: 12px;
+            box-shadow: 0 0 60px rgba(255, 255, 255, 0.5);
+            background: #fff;
+        }
+
+        /* GLOBAL ANIMATION KEYFRAMES */
+        @keyframes shimmer { from { opacity: 0.4; } to { opacity: 1; } }
+        @keyframes slideInFade { from { opacity: 0; transform: translateY(100px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes cinematicZoom { from { opacity: 0; transform: scale(1.2); } to { opacity: 1; transform: scale(1); } }
+
+        @media (max-width: 768px) {
+            .aura-card { width: 180px; height: 320px; }
+            .card-wrapper { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-nebula"></div>
+    <div class="gold-flare"></div>
+
+    <div class="container" id="main-ui">
+        <div class="brand-entrance">
+            <span class="welcome-msg">Welcome to Ayra Fragrances</span>
+            <h1>REVEAL YOUR SCENT AURA</h1>
+        </div>
+        <div class="card-wrapper">
+            <div class="aura-card female-img" onclick="getAura('female')"><div class="card-label">FEMININE</div></div>
+            <div class="aura-card male-img" onclick="getAura('male')"><div class="card-label">MASCULINE</div></div>
+        </div>
+    </div>
+
+    <div class="container" id="reveal-ui">
+        <div class="reveal-chamber">
+            <div id="message" class="message-text">Inhaling the Soul...</div>
+            <a href="https://linktr.ee/ayrafragrances" class="btn-luxury">Visit Collection</a>
+            <div style="margin-top:80px;">
+                <button onclick="window.location.reload()" style="background:none; border:none; color:rgba(212,175,55,0.3); font-size:0.9rem; letter-spacing:6px; text-transform:uppercase; cursor:pointer; font-family: 'Cinzel', serif;">Another Reveal</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = "https://script.google.com/macros/s/AKfycbzdYbobuvTwytAkM0TI-bLW6kxX7JMwNQdT2c-X9QNMv2aXbShRE-g3o8IRN9sAg2Dh/exec";
+        function getAura(gender) {
+            document.getElementById('main-ui').style.display = 'none';
+            document.getElementById('reveal-ui').style.display = 'flex';
+            fetch(`${scriptURL}?gender=${gender}`)
+                .then(r => r.text())
+                .then(t => { document.getElementById('message').innerText = `"${t}"`; })
+                .catch(e => { document.getElementById('message').innerText = "The destiny is shifting. Refresh."; });
+        }
+    </script>
+</body>
+</html>
