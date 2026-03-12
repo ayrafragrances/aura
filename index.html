@@ -6,7 +6,7 @@
     <title>AYRA | The Imperial Aura</title>
     <style>
         /* AYRA FRAGRANCES - IMPERIAL ENGINE V3.1 
-           ADJUSTMENTS: Typography scale refinement
+           ADJUSTMENTS: Optimized Brand-to-Heading Ratio
         */
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@100;300;400&display=swap');
 
@@ -34,7 +34,6 @@
         .background-engine {
             position: fixed; top: -5%; left: -5%; width: 110%; height: 110%;
             z-index: -2;
-            /* UPDATED BACKGROUND IMAGE */
             background-image: url('https://i.postimg.cc/05mRcfNq/Untitled-design.jpg');
             background-size: cover;
             background-position: center;
@@ -82,17 +81,17 @@
         /* 5. IMPERIAL BRANDING */
         .imperial-header {
             text-align: center; 
-            margin-bottom: clamp(40px, 10vh, 80px);
+            margin-bottom: clamp(40px, 8vh, 60px);
             opacity: 0; transform: translateY(20px);
             animation: revealEntrance 2s forwards;
         }
 
         .brand-text {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 300; 
-            /* INCREASED FONT SIZE */
-            font-size: clamp(0.8rem, 2vw, 1.1rem); 
-            letter-spacing: clamp(10px, 2vw, 20px); 
+            font-weight: 400; 
+            /* MADE BIGGER: Adjusted for prominence */
+            font-size: clamp(1.2rem, 3vw, 1.8rem); 
+            letter-spacing: clamp(10px, 2.5vw, 22px); 
             text-transform: uppercase; 
             color: #fcf6ba; 
             margin-bottom: 25px; 
@@ -102,9 +101,11 @@
 
         .main-title {
             font-family: 'Cinzel', serif; 
-            font-size: clamp(2rem, 9vw, 4.5rem);
-            font-weight: 900; letter-spacing: clamp(10px, 4vw, 30px);
-            text-transform: uppercase; line-height: 1;
+            /* MADE SMALLER: Now slightly larger than brand text */
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            font-weight: 900; 
+            letter-spacing: clamp(6px, 2vw, 15px);
+            text-transform: uppercase; line-height: 1.2;
             background: var(--royal-gold); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent;
@@ -184,7 +185,6 @@
         }
 
         .aura-result {
-            /* DECREASED AURA TEXT SIZE */
             font-size: clamp(1.1rem, 4vw, 1.8rem); 
             font-weight: 400; font-style: italic;
             margin-bottom: 50px; color: #fff; line-height: 1.6;
@@ -229,8 +229,8 @@
         }
 
         @media (max-width: 768px) {
-            .brand-text { font-size: 0.8rem; letter-spacing: 6px; }
-            .aura-result { font-size: 1.2rem; }
+            .brand-text { font-size: 1rem; letter-spacing: 8px; }
+            .main-title { font-size: 1.4rem; letter-spacing: 5px; }
             .aura-card { width: 88vw; height: 130vw; }
         }
     </style>
@@ -264,7 +264,7 @@
         <div id="reveal-portal">
             <div class="imperial-chamber">
                 <div id="aura-text" class="aura-result">Inhaling your soul essence...</div>
-                <a href="https://linktr.ee/ayrafragrances" class="btn-zenith">ENTER THE WONDERLAND</a>
+                <a href="https://linktr.ee/ayrafragrances" class="btn-zenith">ENTER THE FRAGRANCE WONDERLAND</a>
                 <br>
                 <button class="reroll" onclick="window.location.reload()">REDEFINE DESTINY</button>
             </div>
@@ -272,7 +272,6 @@
     </div>
 
     <script>
-        // 1. SCROLL THREAD TRACKER
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -280,7 +279,6 @@
             document.getElementById("scroll-thread").style.width = scrolled + "%";
         });
 
-        // 2. AURA FETCH ENGINE
         const scriptURL = "https://script.google.com/macros/s/AKfycbzdYbobuvTwytAkM0TI-bLW6kxX7JMwNQdT2c-X9QNMv2aXbShRE-g3o8IRN9sAg2Dh/exec";
 
         function fetchAura(gender) {
@@ -301,7 +299,6 @@
                 });
         }
 
-        // 3. LOW-OVERHEAD PARALLAX
         if (window.matchMedia("(pointer: fine)").matches) {
             document.addEventListener('mousemove', (e) => {
                 const x = (window.innerWidth / 2 - e.pageX) / 80;
