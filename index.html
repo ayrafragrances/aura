@@ -9,22 +9,22 @@
 
         :root {
             --royal-gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
-            --glass-core: rgba(5, 1, 1, 0.94);
+            --glass-core: rgba(5, 1, 1, 0.96);
         }
 
-        /* PERFUMERY ESSENCE BACKGROUND - SMOKE, MIST, AND TEXTURE (NO BOTTLES) */
+        /* REAL PERFUMERY INGREDIENTS BACKGROUND (NO BOTTLES) */
         body, html { 
             margin: 0; padding: 0; width: 100%; height: 100%; 
-            background: #000 url('https://images.unsplash.com/photo-1616091216791-a5360b5fc58e?q=80&w=2000&auto=format&fit=crop') no-repeat center center fixed;
+            background: #000 url('http://googleusercontent.com/image_collection/image_retrieval/2078333013851241163_0') no-repeat center center fixed;
             background-size: cover;
             color: #d4af37; font-family: 'Playfair Display', serif; 
             overflow: hidden;
         }
 
-        /* THE DIVINE SHADOW OVERLAY */
+        /* CINEMATIC LUXURY OVERLAY */
         body::before {
             content: ""; position: absolute; inset: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(15, 5, 5, 0.75) 0%, rgba(0, 0, 0, 0.98) 100%);
+            background: radial-gradient(circle at 50% 50%, rgba(15, 5, 5, 0.65) 0%, rgba(0, 0, 0, 0.95) 100%);
             z-index: 1; pointer-events: none;
         }
 
@@ -33,7 +33,6 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
 
-        /* CINEMATIC HEADER */
         .header-container { 
             text-align: center; width: 100%; 
             animation: divineEntry 2.5s cubic-bezier(0.19, 1, 0.22, 1);
@@ -43,7 +42,7 @@
         .subtitle {
             font-family: 'Cinzel', serif; font-size: 0.75rem; 
             letter-spacing: 12px; text-transform: uppercase; 
-            margin-bottom: 15px; color: #fcf6ba; opacity: 0.7;
+            margin-bottom: 15px; color: #fcf6ba; opacity: 0.8;
         }
 
         h1 { 
@@ -51,7 +50,7 @@
             letter-spacing: clamp(10px, 4vw, 25px); text-transform: uppercase; 
             margin: 0; font-weight: 900;
             background: var(--royal-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            filter: drop-shadow(0 0 30px rgba(191, 149, 63, 0.5));
+            filter: drop-shadow(0 0 30px rgba(191, 149, 63, 0.6));
         }
 
         /* 3D KINETIC CARDS */
@@ -63,25 +62,24 @@
 
         .aura-card { 
             width: clamp(165px, 42vw, 360px); height: clamp(270px, 68vw, 560px); 
-            border: 1px solid rgba(212, 175, 55, 0.3); 
+            border: 1px solid rgba(212, 175, 55, 0.4); 
             border-radius: 2px; overflow: hidden; position: relative; 
             display: flex; align-items: flex-end; cursor: pointer;
             background-size: cover; background-position: center; 
-            transition: all 0.9s cubic-bezier(0.15, 0.83, 0.66, 1);
+            transition: all 1s cubic-bezier(0.15, 0.83, 0.66, 1);
             box-shadow: 0 40px 90px rgba(0,0,0,1);
             transform-style: preserve-3d;
         }
 
         .aura-card:hover { 
-            transform: translateY(-30px) rotateY(-12deg) rotateX(8deg); 
+            transform: translateY(-30px) rotateY(-12deg) rotateX(8deg) scale(1.02); 
             border-color: #fcf6ba;
             box-shadow: 0 70px 140px rgba(191, 149, 63, 0.5);
         }
 
-        /* LIGHT-GLIDE EFFECT ON HOVER */
         .aura-card::before {
             content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
             transform: skewX(-25deg); transition: 0.8s; z-index: 5;
         }
         .aura-card:hover::before { left: 150%; }
@@ -92,10 +90,10 @@
         .card-label { 
             z-index: 10; font-family: 'Cinzel', serif; font-size: clamp(1rem, 3vw, 2rem); 
             letter-spacing: 10px; color: #fff; width: 100%; text-align: center; 
-            padding: 40px 0; font-weight: 900; background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 40px 0; font-weight: 900; background: linear-gradient(transparent, rgba(0,0,0,0.95));
         }
 
-        /* DIVINE CENTERED REVEAL */
+        /* DIVINE CENTERED REVEAL INTERFACE */
         #reveal-portal { 
             display: none; position: fixed; inset: 0;
             align-items: center; justify-content: center;
@@ -103,80 +101,24 @@
         }
 
         .divine-chamber { 
-            width: 100%; max-width: 1000px; 
+            width: 100%; max-width: 1100px; 
             padding: clamp(80px, 15vh, 160px) 40px;
             background: var(--glass-core); 
-            backdrop-filter: blur(40px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(50px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
             box-shadow: 0 0 250px rgba(0,0,0,1);
             text-align: center; display: flex; flex-direction: column; 
             align-items: center; justify-content: center;
-            animation: zenithReveal 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+            animation: zenithReveal 1.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .aura-message { 
             font-size: clamp(1.6rem, 5.5vw, 4.5rem); font-weight: 900; 
             margin-bottom: clamp(50px, 10vh, 100px); line-height: 1.15; font-style: italic;
-            background: linear-gradient(to bottom, #fff 10%, #d4af37 100%);
+            background: linear-gradient(to bottom, #fff 15%, #d4af37 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8));
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9));
         }
 
         .imperial-btn { 
-            display: inline-block; padding: 25px 95px; 
-            background: var(--royal-gold); color: #000 !important; 
-            text-decoration: none; font-weight: 900; 
-            letter-spacing: 12px; text-transform: uppercase; 
-            font-size: 1.2rem; font-family: 'Cinzel', serif; 
-            transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            box-shadow: 0 15px 45px rgba(191, 149, 63, 0.4);
-        }
-
-        .imperial-btn:hover { 
-            background: #fff; transform: scale(1.1) translateY(-8px); 
-            box-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
-            letter-spacing: 16px;
-        }
-
-        @keyframes divineEntry { from { opacity: 0; transform: translateY(80px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes zenithReveal { from { opacity: 0; transform: scale(1.15) rotateX(10deg); } to { opacity: 1; transform: scale(1) rotateX(0); } }
-    </style>
-</head>
-<body>
-
-    <div class="zenith-master">
-
-        <div class="header-container" id="start-view">
-            <span class="subtitle">Welcome to Ayra Fragrances</span>
-            <h1>REVEAL YOUR SCENT AURA</h1>
-            <div class="aura-grid">
-                <div class="aura-card female-img" onclick="summonAura('female')"><div class="card-label">FEMININE</div></div>
-                <div class="aura-card male-img" onclick="summonAura('male')"><div class="card-label">MASCULINE</div></div>
-            </div>
-        </div>
-
-        <div id="reveal-portal">
-            <div class="divine-chamber">
-                <div id="aura-output" class="aura-message">Seeking your essence...</div>
-                <a href="https://linktr.ee/ayrafragrances" class="imperial-btn">Enter the Empire</a>
-                <div style="margin-top: 80px;">
-                    <button onclick="window.location.reload()" style="background:none; border:none; color:rgba(212,175,55,0.3); font-size:0.9rem; letter-spacing:6px; text-transform:uppercase; cursor:pointer; font-family: 'Cinzel', serif; transition: 0.4s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(212,175,55,0.3)'">Redefine Your Aura</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycbzdYbobuvTwytAkM0TI-bLW6kxX7JMwNQdT2c-X9QNMv2aXbShRE-g3o8IRN9sAg2Dh/exec";
-        function summonAura(gender) {
-            document.getElementById('start-view').style.display = 'none';
-            document.getElementById('reveal-portal').style.display = 'flex';
-            fetch(`${scriptURL}?gender=${gender}`)
-                .then(r => r.text())
-                .then(m => { document.getElementById('aura-output').innerText = `"${m}"`; })
-                .catch(e => { document.getElementById('aura-output').innerText = "The Aura is eternal. Refresh."; });
-        }
-    </script>
-</body>
-</html>
+            display: inline-block;
