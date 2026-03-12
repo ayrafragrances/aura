@@ -13,7 +13,7 @@
         :root {
             --royal-gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
             --gold-soft: #d4af37;
-            --Deep-Wine: #4C0805;
+            --Wine-Deep: #4C0805;
             --glass-gold: rgba(191, 149, 63, 0.15);
             --transition-smooth: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -23,7 +23,7 @@
         
         body, html { 
             width: 100%; height: 100%; 
-            background-color: #1a0302; 
+            background-color: var(--Deep-Wine);
             color: #fff;
             font-family: 'Playfair Display', serif;
             overflow-x: hidden;
@@ -34,7 +34,7 @@
         .background-engine {
             position: fixed; top: -5%; left: -5%; width: 110%; height: 110%;
             z-index: -2;
-            background-image: url('https://i.postimg.cc/05mRcfNq/Untitled-design.jpg');
+            background-image: url('https://i.postimg.cc/05mRcfNq/Untitled-design.png');
             background-size: cover;
             background-position: center;
             filter: brightness(0.3) saturate(0.8) contrast(1.1);
@@ -110,7 +110,7 @@
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
         }
 
-        /* 6. KINETIC ART CARDS (DESKTOP - UNTOUCHED) */
+        /* 6. KINETIC ART CARDS */
         .aura-grid {
             display: flex; gap: clamp(30px, 5vw, 80px);
             flex-wrap: wrap; justify-content: center;
@@ -220,7 +220,7 @@
             .brand-text { font-size: 0.9rem; letter-spacing: 6px; }
             .main-title { font-size: 1.3rem; letter-spacing: 4px; }
             
-            /* Reduced mobile card size for better screen fit */
+            /* Slimmer card sizes for mobile only */
             .aura-card { 
                 width: 70vw; 
                 height: 100vw; 
