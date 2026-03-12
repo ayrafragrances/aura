@@ -3,44 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ayra Fragrances | The Imperial Aura</title>
+    <title>Ayra Fragrances | Imperial Zenith</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
 
         :root {
-            --gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
-            --deep-red: #0a0202;
+            --royal-gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
+            --glass: rgba(5, 1, 1, 0.96);
         }
 
-        /* ABSTRACT PERFUMERY BACKGROUND - ELEMENTS OF MIST & PETALS (NO BOTTLES) */
+        /* ABSTRACT "SCENT-STORM" BACKGROUND - NO BOTTLES */
         body, html { 
             margin: 0; padding: 0; width: 100%; height: 100%; 
-            background: #000 url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
+            background: #000 url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=2029&auto=format&fit=crop') no-repeat center center fixed;
             background-size: cover;
             color: #d4af37; font-family: 'Playfair Display', serif; 
             overflow: hidden;
         }
 
-        /* DYNAMIC SCENT OVERLAY */
+        /* DIVINE LUXURY OVERLAY */
         body::before {
             content: ""; position: absolute; inset: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(10, 2, 2, 0.85) 0%, rgba(0, 0, 0, 0.98) 100%);
+            background: radial-gradient(circle at 50% 50%, rgba(15, 5, 5, 0.8) 0%, rgba(0, 0, 0, 0.98) 100%);
             z-index: 1; pointer-events: none;
         }
 
-        .master-wrapper {
+        .zenith-wrapper {
             width: 100%; height: 100vh; position: relative; z-index: 10;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
 
-        /* SELECTION INTERFACE */
-        .ui-section { 
+        /* INTRO ANIMATION */
+        .hero-section { 
             text-align: center; width: 100%; 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            animation: cinematicEntry 2.5s cubic-bezier(0.19, 1, 0.22, 1);
+            animation: divineEntry 3s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        .top-line {
-            font-family: 'Cinzel', serif; font-size: 0.75rem; 
+        .brand-subtitle {
+            font-family: 'Cinzel', serif; font-size: 0.8rem; 
+            letter-spacing: 15px; text-transform: uppercase; 
+            margin-bottom: 25px; color: #fcf6ba; opacity: 0.8;
+            animation: shimmer 4s infinite alternate;
+        }
+
+        h1 { 
+            font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 7vw, 4.5rem); 
+            letter-spacing: clamp(12px, 5vw, 30px); text-transform: uppercase; 
+            margin: 0; font-weight: 900;
+            background: var(--royal-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            filter: drop-shadow(0 0 35px rgba(191, 149, 63, 0.6));
+        }
+
+        /* 3D KINETIC CARDS */
+        .aura-grid { 
+            display: flex; gap: clamp(25px, 8vw, 100px); 
+            flex-wrap: wrap; justify-content: center; 
+            margin-top: 70px; perspective: 3000px; 
+        }
+
+        .aura-card { 
+            width: clamp(170px, 42vw, 380px); height: clamp(280px, 68vw, 580px); 
+            border: 1px solid rgba(212, 175, 55, 0.4); 
+            border-radius: 4px; overflow: hidden; position: relative; 
+            display: flex; align-items: flex-end; cursor: pointer;
+            background-size: cover; background-position: center; 
+            transition: all 1s cubic-bezier(0.15, 0.83, 0.66, 1);
+            box-shadow: 0 40px 80px rgba(0,0,0,1);
+            transform-style: preserve-3d;
+        }
+
+        .aura-card:hover { 
+            transform: translateY(-40px) rotateY(-15deg) rotateX(10deg) scale(1.05); 
+            border-color: #fcf6ba;
+            box-shadow: 0 80px 150px rgba(191, 149, 63, 0.6);
+        }
+
+        /* LIGHT STREAK HOVER EFFECT */
+        .aura-card::before {
+            content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-25deg); transition: 0.7s; z-index: 5;
+        }
+        .aura-card:hover::before { left: 150%; }
+
+        .aura-card::after {
+            content: ""; position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 60%);
+            z-index: 2;
+        }
+
+        .female-bg { background-image: url('https://i.postimg.cc/g01369tz/Gemini-Generated-Image-usj8m5usj8m5usj8.png'); }
+        .male-bg { background-image: url('https://i.postimg.cc/9fsyq3gM/Gemini-Generated-Image-z4wx9bz4wx9bz4wx.png'); }
+
+        .card-title { 
+            z-index: 10; font-family: 'Cinzel', serif; font-size: clamp(1.2rem, 3.5vw, 2.2rem); 
+            letter-spacing: 12px; color: #fff; width: 100%; 
+            text-align: center; padding: 45px 0; font-weight: 900;
+        }
+
+        /* REVEAL UI - THE DIVINE CENTER */
+        #reveal-portal { 
+            display: none; position: fixed; inset: 0;
+            align-items: center; justify-content: center;
+            z-index: 1000; padding: 30px; background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(25px);
+        }
+
+        .divine-chamber { 
+            width: 100%; max-width: 1200px; 
+            padding: clamp(100px, 20vh, 180px) 50px;
+            background: var(--glass); 
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 250px rgba(0,0,0,1);
+            text-align: center; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center;
+            animation: zenithReveal 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .final-quote { 
+            font-size: clamp(1.8rem, 6vw, 5rem); font-weight: 900; 
+            margin-bottom: clamp(60px, 12vh, 120px); line-height: 1.1; font-style: italic;
+            background: linear-gradient(to bottom, #fff 15%, #d4af37 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9));
+        }
+
+        /* THE IMPERIAL CALL TO ACTION */
+        .zenith-btn { 
+            display: inline-block; padding: 28px 100px; 
+            background: var(--royal-gold); color: #000 !important; 
+            text-decoration: none; font-weight: 900; 
             letter-spacing: 12px; text-transform: uppercase; 
-            margin-bottom: 20px; color: #fcf6ba
+            font-size: 1.3rem; font-family: 'Cinzel', serif; 
+            transition: 0.7s cubic-bezier(0.19, 1, 0.22, 1); border: none;
+            box-shadow: 0 20px 50px rgba(191, 149, 63, 0.5);
+        }
+
+        .zenith-btn:hover { 
+            background: #fff; transform: scale(1.15) translateY(-10px); 
+            box-shadow: 0 0 100px rgba(255, 255, 255, 0.6);
+            letter-spacing: 18px;
+        }
+
+        /* ANIMATION ENGINES */
+        @keyframes divineEntry { from { opacity: 0; transform: translateY(150px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes zenithReveal { from { opacity: 0; transform: scale(1.3) rotateX(15deg); } to { opacity: 1; transform: scale(1) rotateX(0); } }
+        @keyframes shimmer { from { opacity: 0.4; letter-spacing: 10px; } to { opacity: 1; letter-spacing: 15px; } }
+
+        @media (max-width: 768px) {
+            .aura-card:hover { transform: translateY(-20px) scale(1.03); }
+            .divine-chamber { padding: 80px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="zenith-wrapper">
+
+        <div class="hero-section" id="start-view">
+            <div class="header-main">
+                <span class="brand-subtitle">Welcome to Ayra Fragrances</span>
+                <h1>REVEAL YOUR SCENT AURA</h1>
+            </div>
+            <div class="aura-grid">
+                <div class="aura-card female-bg" onclick="summonAura('female')"><div class="card-title">FEMININE</div></div>
+                <div class="aura-card male-bg" onclick="summonAura('male')"><div class="card-title">MASCULINE</div></div>
+            </div>
+        </div>
+
+        <div id="reveal-portal">
+            <div class="divine-chamber">
+                <div id="aura-output" class="final-quote">Inhaling your legacy...</div>
+                <a href="https://linktr.ee/ayrafragrances" class="zenith-btn">Visit the Empire</a>
+                <div style="margin-top: 100px;">
+                    <button onclick="window.location.reload()" style="background:none; border:none; color:rgba(212,175,55,0.4); font-size:1rem; letter-spacing:8px; text-transform:uppercase; cursor:pointer; font-family: 'Cinzel', serif; transition: 0.4s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(212,175,55,0.4)'">Redefine Destiny</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const cloudURL = "https://script.google.com/macros/s/AKfycbzdYbobuvTwytAkM0TI-bLW6kxX7JMwNQdT2c-X9QNMv2aXbShRE-g3o8IRN9sAg2Dh/exec";
+        function summonAura(gender) {
+            document.getElementById('start-view').style.display = 'none';
+            document.getElementById('reveal-portal').style.display = 'flex';
+            fetch(`${cloudURL}?gender=${gender}`)
+                .then(r => r.text())
+                .then(m => { document.getElementById('aura-output').innerText = `"${m}"`; })
+                .catch(e => { document.getElementById('aura-output').innerText = "The Aura is eternal. Refresh."; });
+        }
+    </script>
+</body>
+</html>
