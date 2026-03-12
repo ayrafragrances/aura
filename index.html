@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ayra Fragrances | The Imperial Zenith</title>
+    <title>AYRA FRAGRANCES | The Imperial Zenith</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@200;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@200;400;600&display=swap');
 
         :root {
             --royal-gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
             --gold-static: #d4af37;
             --deep-obsidian: #050202;
             --glass-overlay: rgba(5, 2, 2, 0.98);
-            --transition-main: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-            --glow-shadow: 0 0 30px rgba(191, 149, 63, 0.3);
+            --transition-speed: 0.8s;
         }
 
-        /* 1. CORE RESET & STABILITY */
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        /* 1. ARCHITECTURAL RESET */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         
         body, html { 
             width: 100%; height: 100%; 
@@ -25,301 +24,260 @@
             color: var(--gold-static);
             font-family: 'Playfair Display', serif;
             overflow-x: hidden;
-            cursor: none; /* Custom cursor implementation below */
         }
 
-        /* 2. THE PERFUMERY BACKGROUND ENGINE (FAIL-SAFE) */
+        /* 2. CUSTOM BACKGROUND ENGINE - PASTE YOUR URL BELOW */
         .background-engine {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            /* High-reliability Perfumery Texture: Exotic Spices & Golden Mist */
+            /* PASTE YOUR CUSTOM PERFUMERY IMAGE URL HERE */
             background-image: url('https://i.postimg.cc/05mRcfNq/Untitled-design.jpg');
             background-size: cover;
             background-position: center;
-            filter: brightness(0.4) contrast(1.1);
-            animation: backgroundSway 60s infinite linear;
+            filter: brightness(0.35) contrast(1.2) saturate(0.8);
+            animation: backgroundFloat 40s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+        }
+
+        /* FAIL-SAFE GRADIENT (Always runs behind the image) */
+        .background-engine::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 30% 30%, #1a1100 0%, #050202 100%);
+            z-index: -2;
         }
 
         .divine-vignette {
             position: fixed; inset: 0; z-index: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(5, 2, 2, 0.2) 0%, rgba(0, 0, 0, 0.95) 100%);
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.9) 100%);
             pointer-events: none;
         }
 
-        /* 3. SCROLL PROGRESS INDICATOR */
-        .scroll-progress {
-            position: fixed; top: 0; left: 0; width: 0%; height: 3px;
-            background: var(--royal-gold); z-index: 1001; transition: width 0.1s linear;
+        /* 3. SCROLL PROGRESS BAR */
+        #progress-bar {
+            position: fixed; top: 0; left: 0; width: 0%; height: 2px;
+            background: var(--royal-gold); z-index: 1000;
         }
 
-        /* 4. CUSTOM IMPERIAL CURSOR */
-        .cursor {
-            width: 10px; height: 10px; background: #fff; border-radius: 50%;
-            position: fixed; pointer-events: none; z-index: 9999;
-            mix-blend-mode: difference; transition: transform 0.15s ease-out;
-        }
-        .cursor-follower {
-            width: 40px; height: 40px; border: 1px solid var(--gold-static); border-radius: 50%;
-            position: fixed; pointer-events: none; z-index: 9998;
-            transition: transform 0.2s ease-out, opacity 0.3s;
-        }
-
-        /* 5. MAIN ARCHITECTURE */
+        /* 4. MAIN CONTAINER */
         .zenith-wrapper {
             width: 100%; min-height: 100vh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 60px 20px; position: relative; z-index: 10;
+            padding: 80px 20px; position: relative; z-index: 10;
         }
 
+        /* 5. BRANDING ENGINE */
         .imperial-header {
-            text-align: center; margin-bottom: 8vh;
-            animation: slideUpFade 2s var(--transition-main);
+            text-align: center; margin-bottom: clamp(40px, 10vh, 100px);
+            animation: fadeInUp 1.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        .brand-pre {
-            font-family: 'Cinzel', serif; font-size: 0.7rem;
-            letter-spacing: 15px; text-transform: uppercase;
-            color: #fcf6ba; opacity: 0.7; margin-bottom: 20px; display: block;
+        .brand-text {
+            font-family: 'Cinzel', serif; font-size: clamp(0.8rem, 2.5vw, 1.4rem);
+            letter-spacing: 18px; text-transform: uppercase;
+            color: #fcf6ba; margin-bottom: 20px; display: block;
+            text-shadow: 0 0 15px rgba(191, 149, 63, 0.5);
         }
 
         .main-title {
-            font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 7vw, 5.5rem);
-            font-weight: 900; letter-spacing: clamp(10px, 3vw, 35px);
-            text-transform: uppercase; line-height: 1.1;
+            font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 9vw, 6rem);
+            font-weight: 900; letter-spacing: clamp(10px, 4vw, 40px);
+            text-transform: uppercase; line-height: 1;
             background: var(--royal-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
         }
 
-        /* 6. THE KINETIC GRID ENGINE */
+        /* 6. KINETIC CARD ENGINE */
         .aura-grid {
-            display: flex; gap: clamp(30px, 6vw, 100px);
+            display: flex; gap: clamp(30px, 8vw, 120px);
             flex-wrap: wrap; justify-content: center;
-            perspective: 2000px; width: 100%; max-width: 1400px;
+            perspective: 2500px; width: 100%; max-width: 1400px;
         }
 
         .aura-card {
-            width: clamp(280px, 40vw, 420px); height: clamp(450px, 60vw, 620px);
+            width: clamp(280px, 42vw, 420px); height: clamp(450px, 65vw, 650px);
             position: relative; overflow: hidden; border-radius: 4px;
-            border: 1px solid rgba(191, 149, 63, 0.3);
-            background-color: #0a0a0a; cursor: pointer;
-            transition: var(--transition-main); transform-style: preserve-3d;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+            border: 1px solid rgba(191, 149, 63, 0.25);
+            background-color: #080808; cursor: pointer;
+            transition: var(--transition-speed) cubic-bezier(0.19, 1, 0.22, 1);
+            transform-style: preserve-3d;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9);
         }
 
         .aura-card:hover {
             border-color: #fcf6ba;
-            transform: translateY(-25px) rotateY(-10deg) rotateX(5deg);
-            box-shadow: 0 60px 120px rgba(191, 149, 63, 0.4);
+            transform: translateY(-30px) rotateY(-12deg) scale(1.02);
+            box-shadow: 0 80px 150px rgba(191, 149, 63, 0.4);
         }
 
-        /* GLINT EFFECT */
-        .aura-card::after {
+        /* CARD SWEEP LIGHTING */
+        .aura-card::before {
             content: ""; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: skewX(-20deg); transition: 0.7s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transform: skewX(-20deg); transition: 0.8s ease-in-out; z-index: 5;
         }
-        .aura-card:hover::after { left: 150%; }
+        .aura-card:hover::before { left: 150%; }
 
         .card-media {
             width: 100%; height: 100%; background-size: cover; background-position: center;
-            transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: transform 2s cubic-bezier(0.19, 1, 0.22, 1);
+            filter: grayscale(0.2);
         }
-        .aura-card:hover .card-media { transform: scale(1.15); filter: contrast(1.1); }
+        .aura-card:hover .card-media { transform: scale(1.1); filter: grayscale(0); }
 
         .female-bg { background-image: url('https://i.postimg.cc/g01369tz/Gemini-Generated-Image-usj8m5usj8m5usj8.png'); }
         .male-bg { background-image: url('https://i.postimg.cc/9fsyq3gM/Gemini-Generated-Image-z4wx9bz4wx9bz4wx.png'); }
 
-        .card-info {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            padding: 50px 20px; text-align: center;
-            background: linear-gradient(transparent, rgba(0,0,0,0.95));
-            pointer-events: none;
+        .card-label {
+            position: absolute; bottom: 0; width: 100%; padding: 60px 20px;
+            text-align: center; background: linear-gradient(transparent, rgba(0,0,0,1));
+            font-family: 'Cinzel', serif; font-size: 1.8rem; letter-spacing: 12px; color: #fff;
+            transition: 0.5s;
         }
+        .aura-card:hover .card-label { letter-spacing: 18px; color: var(--gold-static); }
 
-        .card-title {
-            font-family: 'Cinzel', serif; font-size: 1.8rem; letter-spacing: 12px;
-            color: #fff; text-transform: uppercase; font-weight: 900;
-        }
-
-        /* 7. REVEAL CHAMBER (CENTERED COMMAND) */
+        /* 7. THE IMPERIAL REVEAL CHAMBER */
         #reveal-portal {
             display: none; position: fixed; inset: 0;
             z-index: 2000; align-items: center; justify-content: center;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(30px);
-            padding: 20px; opacity: 0; transition: opacity 0.8s ease;
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(40px);
+            padding: 30px; opacity: 0; transition: opacity 1s ease;
         }
 
         .imperial-chamber {
             width: 100%; max-width: 1100px;
             background: var(--glass-overlay);
             border: 1px solid rgba(191, 149, 63, 0.4);
-            padding: clamp(60px, 15vh, 150px) 40px;
+            padding: clamp(80px, 15vh, 180px) 40px;
             text-align: center; position: relative;
             box-shadow: 0 0 200px rgba(0,0,0,1);
-            animation: zoomIn 1s cubic-bezier(0.19, 1, 0.22, 1);
+            animation: chamberEntry 1.4s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         .aura-result {
-            font-size: clamp(1.8rem, 6vw, 4.5rem); font-weight: 900;
-            line-height: 1.2; margin-bottom: 10vh; font-style: italic;
+            font-size: clamp(2rem, 7vw, 5rem); font-weight: 900;
+            line-height: 1.15; margin-bottom: 8vh; font-style: italic;
             background: linear-gradient(to bottom, #fff, var(--gold-static));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8));
         }
 
-        /* 8. THE MASTER BUTTON */
-        .btn-imperial {
-            display: inline-block; padding: 25px 90px;
+        /* 8. CTA ELEMENTS */
+        .btn-zenith {
+            display: inline-block; padding: 28px 100px;
             background: var(--royal-gold); color: #000 !important;
             text-decoration: none; font-family: 'Cinzel', serif;
-            font-weight: 900; font-size: 1.1rem; letter-spacing: 12px;
-            text-transform: uppercase; position: relative;
-            transition: 0.6s; box-shadow: 0 20px 50px rgba(191, 149, 63, 0.4);
+            font-weight: 900; font-size: 1.2rem; letter-spacing: 12px;
+            text-transform: uppercase; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            box-shadow: 0 25px 60px rgba(191, 149, 63, 0.5);
         }
 
-        .btn-imperial:hover {
+        .btn-zenith:hover {
             background: #fff; transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 30px 70px rgba(255, 255, 255, 0.3);
-            letter-spacing: 16px;
+            box-shadow: 0 40px 100px rgba(255, 255, 255, 0.3);
+            letter-spacing: 18px;
         }
 
-        /* 9. RE-ROLL ACTION */
-        .btn-reroll {
-            margin-top: 80px; background: none; border: none;
+        .reroll {
+            margin-top: 100px; background: none; border: none;
             color: rgba(255, 255, 255, 0.3); font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase; letter-spacing: 8px; font-size: 0.75rem;
-            cursor: pointer; transition: 0.4s;
+            text-transform: uppercase; letter-spacing: 10px; font-size: 0.8rem;
+            cursor: pointer; transition: 0.4s; font-weight: 600;
         }
-        .btn-reroll:hover { color: var(--gold-static); letter-spacing: 12px; }
+        .reroll:hover { color: #fff; letter-spacing: 15px; }
 
-        /* 10. ANIMATION REPOSITORY */
-        @keyframes backgroundSway {
-            0% { transform: scale(1.1) translateX(0); }
-            50% { transform: scale(1.2) translateX(-2%); }
-            100% { transform: scale(1.1) translateX(0); }
+        /* 9. ANIMATIONS LIBRARY */
+        @keyframes backgroundFloat {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(-2%, -2%); }
         }
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(100px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(80px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.85); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes chamberEntry {
+            from { opacity: 0; transform: scale(0.9) rotateX(10deg); }
+            to { opacity: 1; transform: scale(1) rotateX(0); }
         }
 
-        /* MOBILE OPTIMIZATIONS */
+        /* 10. MOBILE MASTERING */
         @media (max-width: 768px) {
             .zenith-wrapper { padding-top: 100px; }
-            .aura-card { width: 90vw; height: 130vw; }
-            .main-title { letter-spacing: 8px; }
-            .btn-imperial { padding: 20px 40px; letter-spacing: 6px; font-size: 0.9rem; }
-            .cursor, .cursor-follower { display: none; }
-            body { cursor: auto; }
+            .aura-card { width: 85vw; height: 130vw; }
+            .aura-card:hover { transform: translateY(-15px) scale(1.02); }
+            .main-title { letter-spacing: 10px; }
+            .btn-zenith { padding: 22px 50px; font-size: 1rem; letter-spacing: 8px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="background-engine"></div>
+    <div class="background-engine" id="bgEngine"></div>
     <div class="divine-vignette"></div>
-    <div class="scroll-progress" id="progressBar"></div>
-
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-follower" id="follower"></div>
+    <div id="progress-bar"></div>
 
     <div class="zenith-wrapper">
-        
-        <header class="imperial-header" id="headerView">
-            <span class="brand-pre">Fragrance House</span>
-            <h1 class="main-title">THE AURA<br>REVEAL</h1>
-            <p style="margin-top: 20px; font-family: 'Montserrat', sans-serif; letter-spacing: 5px; opacity: 0.5; font-size: 0.8rem;">CHOOSE YOUR ESSENCE</p>
+        <header class="imperial-header">
+            <span class="brand-text">AYRA FRAGRANCES</span>
+            <h1 class="main-title">THE SCENT<br>AURA</h1>
         </header>
 
-        <main class="aura-grid" id="gridView">
-            <div class="aura-card" onclick="triggerAura('female')">
+        <main class="aura-grid">
+            <div class="aura-card" onclick="fetchAura('female')">
                 <div class="card-media female-bg"></div>
-                <div class="card-info">
-                    <h2 class="card-title">FEMININE</h2>
-                </div>
+                <div class="card-label">FEMININE</div>
             </div>
 
-            <div class="aura-card" onclick="triggerAura('male')">
+            <div class="aura-card" onclick="fetchAura('male')">
                 <div class="card-media male-bg"></div>
-                <div class="card-info">
-                    <h2 class="card-title">MASCULINE</h2>
-                </div>
+                <div class="card-label">MASCULINE</div>
             </div>
         </main>
 
         <div id="reveal-portal">
             <div class="imperial-chamber">
-                <div id="aura-text" class="aura-result">Consulting the Oracle...</div>
-                <a href="https://linktr.ee/ayrafragrances" class="btn-imperial">Claim Your Scent</a>
+                <div id="aura-text" class="aura-result">ANALYZING THE AETHER...</div>
+                <a href="https://linktr.ee/ayrafragrances" class="btn-zenith">ENTER THE EMPIRE</a>
                 <br>
-                <button class="btn-reroll" onclick="window.location.reload()">Start Anew</button>
+                <button class="reroll" onclick="window.location.reload()">REDEFINE DESTINY</button>
             </div>
         </div>
-
     </div>
 
     <script>
-        // 1. DYNAMIC CURSOR LOGIC
-        const cursor = document.getElementById('cursor');
-        const follower = document.getElementById('follower');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                follower.style.left = e.clientX - 15 + 'px';
-                follower.style.top = e.clientY - 15 + 'px';
-            }, 50);
+        // SCROLL PROGRESS ENGINE
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
         });
 
-        // 2. SCROLL PROGRESS
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progressBar").style.width = scrolled + "%";
-        };
-
-        // 3. AURA REVEAL ENGINE
+        // AURA DATA ENGINE
         const scriptURL = "https://script.google.com/macros/s/AKfycbzdYbobuvTwytAkM0TI-bLW6kxX7JMwNQdT2c-X9QNMv2aXbShRE-g3o8IRN9sAg2Dh/exec";
 
-        function triggerAura(gender) {
+        function fetchAura(gender) {
             const portal = document.getElementById('reveal-portal');
-            const auraText = document.getElementById('aura-text');
-            const mainContent = document.getElementById('headerView');
-            const gridContent = document.getElementById('gridView');
-
-            // Visual Transitions
+            const output = document.getElementById('aura-text');
+            
             portal.style.display = 'flex';
             setTimeout(() => portal.style.opacity = '1', 10);
-            
-            mainContent.style.filter = 'blur(20px)';
-            gridContent.style.filter = 'blur(20px)';
 
-            // Fetch Data
             fetch(`${scriptURL}?gender=${gender}`)
-                .then(response => response.text())
+                .then(r => r.text())
                 .then(data => {
-                    auraText.innerText = `"${data}"`;
+                    output.innerText = `"${data}"`;
                 })
-                .catch(error => {
-                    auraText.innerText = "The Aura is eternal. Please refresh.";
-                    console.error('Error:', error);
+                .catch(err => {
+                    output.innerText = "THE AURA IS ETERNAL. PLEASE REFRESH.";
+                    console.error('Imperial Engine Error:', err);
                 });
         }
 
-        // 4. PARALLAX EFFECT FOR BACKGROUND
+        // PARALLAX BACKGROUND ENGINE
         document.addEventListener('mousemove', (e) => {
-            let x = (window.innerWidth / 2 - e.pageX) / 50;
-            let y = (window.innerHeight / 2 - e.pageY) / 50;
-            document.querySelector('.background-engine').style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
+            const x = (window.innerWidth / 2 - e.pageX) / 45;
+            const y = (window.innerHeight / 2 - e.pageY) / 45;
+            document.getElementById('bgEngine').style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
         });
     </script>
 </body>
 </html>
-
