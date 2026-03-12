@@ -3,122 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ayra Fragrances | Imperial Zenith</title>
+    <title>Ayra Fragrances | The Imperial Zenith</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@200;400&display=swap');
 
         :root {
             --royal-gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
-            --glass-core: rgba(5, 1, 1, 0.96);
+            --gold-static: #d4af37;
+            --deep-obsidian: #050202;
+            --glass-overlay: rgba(5, 2, 2, 0.98);
+            --transition-main: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            --glow-shadow: 0 0 30px rgba(191, 149, 63, 0.3);
         }
 
-        /* REAL PERFUMERY INGREDIENTS BACKGROUND (NO BOTTLES) */
+        /* 1. CORE RESET & STABILITY */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
         body, html { 
-            margin: 0; padding: 0; width: 100%; height: 100%; 
-            background: #000 url('http://googleusercontent.com/image_collection/image_retrieval/2078333013851241163_0') no-repeat center center fixed;
+            width: 100%; height: 100%; 
+            background-color: var(--deep-obsidian);
+            color: var(--gold-static);
+            font-family: 'Playfair Display', serif;
+            overflow-x: hidden;
+            cursor: none; /* Custom cursor implementation below */
+        }
+
+        /* 2. THE PERFUMERY BACKGROUND ENGINE (FAIL-SAFE) */
+        .background-engine {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            /* High-reliability Perfumery Texture: Exotic Spices & Golden Mist */
+            background-image: url('https://images.unsplash.com/photo-1592914610354-fd354ea45e44?q=80&w=2500&auto=format&fit=crop');
             background-size: cover;
-            color: #d4af37; font-family: 'Playfair Display', serif; 
-            overflow: hidden;
+            background-position: center;
+            filter: brightness(0.4) contrast(1.1);
+            animation: backgroundSway 60s infinite linear;
         }
 
-        /* CINEMATIC LUXURY OVERLAY */
-        body::before {
-            content: ""; position: absolute; inset: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(15, 5, 5, 0.65) 0%, rgba(0, 0, 0, 0.95) 100%);
-            z-index: 1; pointer-events: none;
+        .divine-vignette {
+            position: fixed; inset: 0; z-index: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(5, 2, 2, 0.2) 0%, rgba(0, 0, 0, 0.95) 100%);
+            pointer-events: none;
         }
 
-        .zenith-master {
-            width: 100%; height: 100vh; position: relative; z-index: 10;
+        /* 3. SCROLL PROGRESS INDICATOR */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+            background: var(--royal-gold); z-index: 1001; transition: width 0.1s linear;
+        }
+
+        /* 4. CUSTOM IMPERIAL CURSOR */
+        .cursor {
+            width: 10px; height: 10px; background: #fff; border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999;
+            mix-blend-mode: difference; transition: transform 0.15s ease-out;
+        }
+        .cursor-follower {
+            width: 40px; height: 40px; border: 1px solid var(--gold-static); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9998;
+            transition: transform 0.2s ease-out, opacity 0.3s;
+        }
+
+        /* 5. MAIN ARCHITECTURE */
+        .zenith-wrapper {
+            width: 100%; min-height: 100vh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 60px 20px; position: relative; z-index: 10;
         }
 
-        .header-container { 
-            text-align: center; width: 100%; 
-            animation: divineEntry 2.5s cubic-bezier(0.19, 1, 0.22, 1);
-            margin-bottom: clamp(30px, 8vh, 60px);
+        .imperial-header {
+            text-align: center; margin-bottom: 8vh;
+            animation: slideUpFade 2s var(--transition-main);
         }
 
-        .subtitle {
-            font-family: 'Cinzel', serif; font-size: 0.75rem; 
-            letter-spacing: 12px; text-transform: uppercase; 
-            margin-bottom: 15px; color: #fcf6ba; opacity: 0.8;
+        .brand-pre {
+            font-family: 'Cinzel', serif; font-size: 0.7rem;
+            letter-spacing: 15px; text-transform: uppercase;
+            color: #fcf6ba; opacity: 0.7; margin-bottom: 20px; display: block;
         }
 
-        h1 { 
-            font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 6vw, 4rem); 
-            letter-spacing: clamp(10px, 4vw, 25px); text-transform: uppercase; 
-            margin: 0; font-weight: 900;
-            background: var(--royal-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            filter: drop-shadow(0 0 30px rgba(191, 149, 63, 0.6));
+        .main-title {
+            font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 7vw, 5.5rem);
+            font-weight: 900; letter-spacing: clamp(10px, 3vw, 35px);
+            text-transform: uppercase; line-height: 1.1;
+            background: var(--royal-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
         }
 
-        /* 3D KINETIC CARDS */
-        .aura-grid { 
-            display: flex; gap: clamp(20px, 6vw, 80px); 
-            flex-wrap: wrap; justify-content: center; 
-            perspective: 2500px; 
+        /* 6. THE KINETIC GRID ENGINE */
+        .aura-grid {
+            display: flex; gap: clamp(30px, 6vw, 100px);
+            flex-wrap: wrap; justify-content: center;
+            perspective: 2000px; width: 100%; max-width: 1400px;
         }
 
-        .aura-card { 
-            width: clamp(165px, 42vw, 360px); height: clamp(270px, 68vw, 560px); 
-            border: 1px solid rgba(212, 175, 55, 0.4); 
-            border-radius: 2px; overflow: hidden; position: relative; 
-            display: flex; align-items: flex-end; cursor: pointer;
-            background-size: cover; background-position: center; 
-            transition: all 1s cubic-bezier(0.15, 0.83, 0.66, 1);
-            box-shadow: 0 40px 90px rgba(0,0,0,1);
-            transform-style: preserve-3d;
+        .aura-card {
+            width: clamp(280px, 40vw, 420px); height: clamp(450px, 60vw, 620px);
+            position: relative; overflow: hidden; border-radius: 4px;
+            border: 1px solid rgba(191, 149, 63, 0.3);
+            background-color: #0a0a0a; cursor: pointer;
+            transition: var(--transition-main); transform-style: preserve-3d;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
         }
 
-        .aura-card:hover { 
-            transform: translateY(-30px) rotateY(-12deg) rotateX(8deg) scale(1.02); 
+        .aura-card:hover {
             border-color: #fcf6ba;
-            box-shadow: 0 70px 140px rgba(191, 149, 63, 0.5);
+            transform: translateY(-25px) rotateY(-10deg) rotateX(5deg);
+            box-shadow: 0 60px 120px rgba(191, 149, 63, 0.4);
         }
 
-        .aura-card::before {
-            content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
-            transform: skewX(-25deg); transition: 0.8s; z-index: 5;
+        /* GLINT EFFECT */
+        .aura-card::after {
+            content: ""; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-20deg); transition: 0.7s;
         }
-        .aura-card:hover::before { left: 150%; }
+        .aura-card:hover::after { left: 150%; }
 
-        .female-img { background-image: url('https://i.postimg.cc/g01369tz/Gemini-Generated-Image-usj8m5usj8m5usj8.png'); }
-        .male-img { background-image: url('https://i.postimg.cc/9fsyq3gM/Gemini-Generated-Image-z4wx9bz4wx9bz4wx.png'); }
+        .card-media {
+            width: 100%; height: 100%; background-size: cover; background-position: center;
+            transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .aura-card:hover .card-media { transform: scale(1.15); filter: contrast(1.1); }
 
-        .card-label { 
-            z-index: 10; font-family: 'Cinzel', serif; font-size: clamp(1rem, 3vw, 2rem); 
-            letter-spacing: 10px; color: #fff; width: 100%; text-align: center; 
-            padding: 40px 0; font-weight: 900; background: linear-gradient(transparent, rgba(0,0,0,0.95));
+        .female-bg { background-image: url('https://i.postimg.cc/g01369tz/Gemini-Generated-Image-usj8m5usj8m5usj8.png'); }
+        .male-bg { background-image: url('https://i.postimg.cc/9fsyq3gM/Gemini-Generated-Image-z4wx9bz4wx9bz4wx.png'); }
+
+        .card-info {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 50px 20px; text-align: center;
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
+            pointer-events: none;
         }
 
-        /* DIVINE CENTERED REVEAL INTERFACE */
-        #reveal-portal { 
+        .card-title {
+            font-family: 'Cinzel', serif; font-size: 1.8rem; letter-spacing: 12px;
+            color: #fff; text-transform: uppercase; font-weight: 900;
+        }
+
+        /* 7. REVEAL CHAMBER (CENTERED COMMAND) */
+        #reveal-portal {
             display: none; position: fixed; inset: 0;
-            align-items: center; justify-content: center;
-            z-index: 1000; padding: 25px;
+            z-index: 2000; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(30px);
+            padding: 20px; opacity: 0; transition: opacity 0.8s ease;
         }
 
-        .divine-chamber { 
-            width: 100%; max-width: 1100px; 
-            padding: clamp(80px, 15vh, 160px) 40px;
-            background: var(--glass-core); 
-            backdrop-filter: blur(50px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 0 250px rgba(0,0,0,1);
-            text-align: center; display: flex; flex-direction: column; 
-            align-items: center; justify-content: center;
-            animation: zenithReveal 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+        .imperial-chamber {
+            width: 100%; max-width: 1100px;
+            background: var(--glass-overlay);
+            border: 1px solid rgba(191, 149, 63, 0.4);
+            padding: clamp(60px, 15vh, 150px) 40px;
+            text-align: center; position: relative;
+            box-shadow: 0 0 200px rgba(0,0,0,1);
+            animation: zoomIn 1s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        .aura-message { 
-            font-size: clamp(1.6rem, 5.5vw, 4.5rem); font-weight: 900; 
-            margin-bottom: clamp(50px, 10vh, 100px); line-height: 1.15; font-style: italic;
-            background: linear-gradient(to bottom, #fff 15%, #d4af37 100%);
+        .aura-result {
+            font-size: clamp(1.8rem, 6vw, 4.5rem); font-weight: 900;
+            line-height: 1.2; margin-bottom: 10vh; font-style: italic;
+            background: linear-gradient(to bottom, #fff, var(--gold-static));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9));
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
         }
 
-        .imperial-btn { 
-            display: inline-block;
+        /* 8. THE MASTER BUTTON */
+        .btn-imperial {
+            display: inline-block; padding: 25px 90px;
+            background: var(--royal-gold); color: #000 !important;
+            text-decoration: none; font-family: 'Cinzel', serif;
+            font-weight: 900; font-size: 1.1rem; letter-spacing: 12px;
+            text-transform: uppercase; position: relative;
+            transition: 0.6s; box-shadow: 0 20px 50px rgba(191, 149, 63, 0.4);
+        }
+
+        .btn-imperial:hover {
+            background: #fff; transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 30px 70px rgba(255, 255, 255, 0.3);
+            letter-spacing: 16px;
+        }
+
+        /* 9. RE-ROLL ACTION */
+        .btn-reroll {
+            margin-top: 80px; background: none; border: none;
+            color: rgba(255, 255, 255, 0.3); font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase; letter-spacing: 8px; font-size: 0.75rem;
+            cursor: pointer; transition: 0.4s;
+        }
+        .btn-reroll:hover { color: var(--gold-static); letter-spacing: 12px; }
+
+        /* 10. ANIMATION REPOSITORY */
+        @keyframes backgroundSway {
+            0% { transform: scale(1.1) translateX(0); }
+            50% { transform: scale(1.2) translateX(-2%); }
+            100% { transform: scale(1.1) translateX(0); }
+        }
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(100px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* MOBILE OPTIMIZATIONS */
+        @media (max-width: 768px) {
+            .zenith-wrapper { padding-top: 100px; }
+            .aura-card { width: 90vw; height: 130vw; }
+            .main-title { letter-spacing: 8px; }
+            .btn-imperial { padding: 20px 40px; letter-spacing: 6px; font-size: 0.9rem; }
+            .cursor, .cursor-follower { display: none; }
+            body { cursor: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-engine"></div>
+    <div class="divine-vignette"></div>
+    <div class="scroll-progress" id="progressBar"></div>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="follower"></div>
+
+    <div class="zenith-wrapper">
+        
+        <header class="imperial-header" id="headerView">
+            <span class="brand-pre">Fragrance House</span>
+            <h1 class="main-title">THE AURA<br>REVEAL</h1>
+            <p style="margin-top: 20px; font-family: 'Montserrat', sans-serif; letter-spacing: 5px; opacity: 0.5; font-size: 0.8rem;">CHOOSE YOUR ESSENCE</p>
+        </header>
+
+        <main class="aura-grid" id="gridView">
+            <div class="aura-card" onclick="triggerAura('female')">
+                <div class="card-media female-bg"></div>
+                <div class="card-info">
+                    <h2 class="card-title">FEMININE</h2>
+                </div>
+            </div>
+
+            <div class="aura-card" onclick="triggerAura('male')">
+                <div class="card-media male-bg"></div>
+                <div class="card-info">
+                    <h2 class="card-title">MASCULINE</h2>
+                </div>
+            </div>
+        </main>
+
+        <div id="reveal-portal">
+            <div class="imperial-chamber">
+                <div id="aura-text" class="aura-result">Consulting the Oracle...</div>
+                <a href="https://linktr.ee/ayrafragrances" class="btn-imperial">Claim Your Scent</a>
+                <br>
+                <button class="btn-reroll" onclick="window.location.reload()">Start Anew</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 1. DYNAMIC CURSOR LOGIC
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                follower.style.left = e.clientX - 15 + 'px';
+                follower.style.top = e.clientY - 15 + 'px';
+            }, 50);
+        });
+
+        // 2. SCROLL PROGRESS
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+
+        // 3. AURA REVEAL ENGINE
+        const scriptURL = "https://script.google.com/macros/s/AKfycbzdYbobuvTwytAkM0TI-bLW6kxX7JMwNQdT2c-X9QNMv2aXbShRE-g3o8IRN9sAg2Dh/exec";
+
+        function triggerAura(gender) {
+            const portal = document.getElementById('reveal-portal');
+            const auraText = document.getElementById('aura-text');
+            const mainContent = document.getElementById('headerView');
+            const gridContent = document.getElementById('gridView');
+
+            // Visual Transitions
+            portal.style.display = 'flex';
+            setTimeout(() => portal.style.opacity = '1', 10);
+            
+            mainContent.style.filter = 'blur(20px)';
+            gridContent.style.filter = 'blur(20px)';
+
+            // Fetch Data
+            fetch(`${scriptURL}?gender=${gender}`)
+                .then(response => response.text())
+                .then(data => {
+                    auraText.innerText = `"${data}"`;
+                })
+                .catch(error => {
+                    auraText.innerText = "The Aura is eternal. Please refresh.";
+                    console.error('Error:', error);
+                });
+        }
+
+        // 4. PARALLAX EFFECT FOR BACKGROUND
+        document.addEventListener('mousemove', (e) => {
+            let x = (window.innerWidth / 2 - e.pageX) / 50;
+            let y = (window.innerHeight / 2 - e.pageY) / 50;
+            document.querySelector('.background-engine').style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
+        });
+    </script>
+</body>
+</html>
