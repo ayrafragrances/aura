@@ -6,14 +6,14 @@
     <title>AYRA | The Imperial Aura</title>
     <style>
         /* AYRA FRAGRANCES - IMPERIAL ENGINE V3.1 
-           ADJUSTMENTS: Optimized Brand-to-Heading Ratio
+            ADJUSTMENTS: Desktop sizing preserved. Mobile cards refined for elegance.
         */
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,600;0,900;1,500&family=Montserrat:wght@200;400;500&display=swap');
 
         :root {
             --royal-gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
             --gold-soft: #d4af37;
-            --Wine-(Deep):#4C0805;
+            --Deep-Wine: #4C0805;
             --glass-gold: rgba(191, 149, 63, 0.15);
             --transition-smooth: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -23,7 +23,7 @@
         
         body, html { 
             width: 100%; height: 100%; 
-            background-color: var(--Deep-Wine);
+            background-color: #1a0302; 
             color: #fff;
             font-family: 'Playfair Display', serif;
             overflow-x: hidden;
@@ -89,7 +89,6 @@
         .brand-text {
             font-family: 'Montserrat', sans-serif;
             font-weight: 400; 
-            /* MADE BIGGER: Adjusted for prominence */
             font-size: clamp(1.2rem, 3vw, 1.8rem); 
             letter-spacing: clamp(10px, 2.5vw, 22px); 
             text-transform: uppercase; 
@@ -101,7 +100,6 @@
 
         .main-title {
             font-family: 'Cinzel', serif; 
-            /* MADE SMALLER: Now slightly larger than brand text */
             font-size: clamp(1.6rem, 5vw, 2.4rem);
             font-weight: 900; 
             letter-spacing: clamp(6px, 2vw, 15px);
@@ -112,7 +110,7 @@
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
         }
 
-        /* 6. KINETIC ART CARDS */
+        /* 6. KINETIC ART CARDS (DESKTOP - UNTOUCHED) */
         .aura-grid {
             display: flex; gap: clamp(30px, 5vw, 80px);
             flex-wrap: wrap; justify-content: center;
@@ -165,7 +163,7 @@
             z-index: 15;
         }
 
-        /* 7. REVEAL PORTAL (The Chamber) */
+        /* 7. REVEAL PORTAL */
         #reveal-portal {
             display: none; position: fixed; inset: 0;
             z-index: 3000; align-items: center; justify-content: center;
@@ -193,7 +191,6 @@
             text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* 8. CTA ELEMENTS */
         .btn-zenith {
             display: inline-block; padding: 20px 40px;
             background: var(--royal-gold); color: #000 !important;
@@ -203,35 +200,38 @@
             position: relative; overflow: hidden;
         }
 
-        .btn-zenith:hover {
-            transform: scale(1.05); letter-spacing: 8px;
-            background: #fff;
-        }
-
         .reroll {
             margin-top: 40px; background: none; border: none;
             color: rgba(255, 255, 255, 0.25); font-family: 'Montserrat', sans-serif;
             text-transform: uppercase; letter-spacing: 6px; font-size: 0.6rem;
             cursor: pointer; transition: 0.4s;
         }
-        .reroll:hover { color: #fff; letter-spacing: 10px; }
 
         /* 9. KEYFRAME LIBRARY */
-        @keyframes lightPulse {
-            0% { opacity: 0.3; } 100% { opacity: 0.7; }
-        }
-        @keyframes revealEntrance {
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes lightPulse { 0% { opacity: 0.3; } 100% { opacity: 0.7; } }
+        @keyframes revealEntrance { to { opacity: 1; transform: translateY(0); } }
         @keyframes chamberScale {
             from { transform: scale(0.95) translateY(20px); opacity: 0; }
             to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
+        /* --- MOBILE REFINEMENT: ONLY FOR MOBILE --- */
         @media (max-width: 768px) {
-            .brand-text { font-size: 1rem; letter-spacing: 8px; }
-            .main-title { font-size: 1.4rem; letter-spacing: 5px; }
-            .aura-card { width: 88vw; height: 130vw; }
+            .brand-text { font-size: 0.9rem; letter-spacing: 6px; }
+            .main-title { font-size: 1.3rem; letter-spacing: 4px; }
+            
+            /* Reduced mobile card size for better screen fit */
+            .aura-card { 
+                width: 70vw; 
+                height: 100vw; 
+                margin-bottom: 20px;
+            }
+            
+            .card-label { padding: 40px 15px; font-size: 0.9rem; letter-spacing: 8px; }
+            
+            .aura-grid {
+                gap: 30px; 
+            }
         }
     </style>
 </head>
@@ -284,18 +284,13 @@
         function fetchAura(gender) {
             const portal = document.getElementById('reveal-portal');
             const output = document.getElementById('aura-text');
-            
             portal.style.display = 'flex';
             setTimeout(() => portal.style.opacity = '1', 50);
-
             fetch(`${scriptURL}?gender=${gender}`)
                 .then(r => r.text())
-                .then(data => {
-                    output.innerText = `"${data}"`;
-                })
+                .then(data => { output.innerText = `"${data}"`; })
                 .catch(err => {
                     output.innerText = "THE VOID IS SILENT. REFRESH.";
-                    console.error('Imperial Error:', err);
                 });
         }
 
@@ -303,10 +298,10 @@
             document.addEventListener('mousemove', (e) => {
                 const x = (window.innerWidth / 2 - e.pageX) / 80;
                 const y = (window.innerHeight / 2 - e.pageY) / 80;
-                document.getElementById('bgEngine').style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+                const bg = document.getElementById('bgEngine');
+                if(bg) bg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
             });
         }
     </script>
 </body>
 </html>
-
