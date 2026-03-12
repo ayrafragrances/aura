@@ -7,55 +7,46 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #1a0505; color: #d4af37; font-family: 'Playfair Display', serif; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .container { text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s; }
+        .container { text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         h1 { font-family: 'Cinzel', serif; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.8rem; }
         .card-wrapper { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        .aura-card { width: 140px; height: 220px; text-decoration: none; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.4); overflow: hidden; position: relative; display: flex; align-items: flex-end; padding: 10px; box-sizing: border-box; background-color: #000; cursor: pointer; }
-        .card-label { position: relative; z-index: 2; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; color: #fcf6ba; width: 100%; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 8px; }
+        .aura-card { width: 140px; height: 220px; text-decoration: none; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.4); overflow: hidden; position: relative; display: flex; align-items: flex-end; padding: 10px; box-sizing: border-box; background-size: cover; background-position: center; cursor: pointer; transition: transform 0.3s; }
+        .aura-card:active { transform: scale(0.95); }
+        /* YOUR AURA IMAGES FIXED HERE */
+        .female-img { background-image: url('https://i.postimg.cc/g01369tz/Gemini-Generated-Image-usj8m5usj8m5usj8.png'); }
+        .male-img { background-image: url('https://i.postimg.cc/9fsyq3gM/Gemini-Generated-Image-z4wx9bz4wx9bz4wx.png'); }
+        .card-label { position: relative; z-index: 2; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; color: #fcf6ba; width: 100%; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 8px; background: rgba(0,0,0,0.6); }
         .reveal-chamber { display: none; background: rgba(15, 5, 5, 0.95); padding: 40px 20px; border: 1px solid #d4af37; width: 85%; max-width: 500px; text-align: center; }
         .message-text { font-style: italic; font-size: 1.4rem; color: #fff; margin-bottom: 30px; line-height: 1.4; }
         .btn-luxury { display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #d4af37, #aa771c); color: #000 !important; text-decoration: none; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem; font-family: 'Cinzel', serif; cursor: pointer; border: none; }
-        .loading { color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 4px; display: none; }
     </style>
 </head>
 <body>
     <div class="container" id="main-ui">
         <h1>REVEAL YOUR SCENT AURA</h1>
         <div class="card-wrapper">
-            <div class="aura-card" onclick="getAura('female')"><div class="card-label">FEMININE</div></div>
-            <div class="aura-card" onclick="getAura('male')"><div class="card-label">MASCULINE</div></div>
+            <div class="aura-card female-img" onclick="getAura('female')"><div class="card-label">FEMININE</div></div>
+            <div class="aura-card male-img" onclick="getAura('male')"><div class="card-label">MASCULINE</div></div>
         </div>
     </div>
-
     <div class="container" id="reveal-ui" style="display:none;">
-        <div class="reveal-chamber">
-            <div id="loader" class="loading">COMMUNING WITH YOUR ESSENCE...</div>
-            <div id="message" class="message-text"></div>
+        <div class="reveal-chamber" style="display:block;">
+            <div id="message" class="message-text">COMMUNING WITH YOUR ESSENCE...</div>
             <a href="https://linktr.ee/ayrafragrances" class="btn-luxury">Visit Ayra</a>
             <div style="margin-top:30px;">
                 <button onclick="window.location.reload()" style="background:none; border:none; color:rgba(212,175,55,0.5); font-size:0.65rem; letter-spacing:3px; text-transform:uppercase; cursor:pointer;">Reveal Another</button>
             </div>
         </div>
     </div>
-
     <script>
-        const scriptURL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
-
+        const scriptURL = "https://script.google.com/macros/s/AKfycbzdYbobuvTwytAkM0TI-bLW6kxX7JMwNQdT2c-X9QNMv2aXbShRE-g3o8IRN9sAg2Dh/exec";
         function getAura(gender) {
             document.getElementById('main-ui').style.display = 'none';
             document.getElementById('reveal-ui').style.display = 'flex';
-            document.getElementById('loader').style.display = 'block';
-            document.getElementById('message').innerText = '';
-
             fetch(`${scriptURL}?gender=${gender}`)
                 .then(response => response.text())
-                .then(text => {
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('message').innerText = `"${text}"`;
-                })
-                .catch(err => {
-                    document.getElementById('message').innerText = "Your aura is shifting. Please try again.";
-                });
+                .then(text => { document.getElementById('message').innerText = '"' + text + '"'; })
+                .catch(err => { document.getElementById('message').innerText = "Your aura is shifting. Please try again."; });
         }
     </script>
 </body>
