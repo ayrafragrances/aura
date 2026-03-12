@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AYRA | The Imperial Aura</title>
     <style>
-        /* AYRA FRAGRANCES - IMPERIAL ENGINE V3.0 
-           CORE PHILOSOPHY: LIGHT OVER PIXELS 
+        /* AYRA FRAGRANCES - IMPERIAL ENGINE V3.1 
+           ADJUSTMENTS: Typography scale refinement
         */
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@100;300;400&display=swap');
 
@@ -34,6 +34,7 @@
         .background-engine {
             position: fixed; top: -5%; left: -5%; width: 110%; height: 110%;
             z-index: -2;
+            /* UPDATED BACKGROUND IMAGE */
             background-image: url('https://i.postimg.cc/05mRcfNq/Untitled-design.jpg');
             background-size: cover;
             background-position: center;
@@ -41,7 +42,6 @@
             will-change: transform;
         }
 
-        /* LIGHT LEAK ANIMATION */
         .light-leak {
             position: fixed; inset: 0;
             background: radial-gradient(circle at 20% 30%, rgba(191,149,63,0.08) 0%, transparent 50%),
@@ -51,7 +51,6 @@
             animation: lightPulse 10s infinite alternate;
         }
 
-        /* DUST PARTICLE OVERLAY */
         .particles {
             position: fixed; inset: 0;
             background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
@@ -66,7 +65,7 @@
             pointer-events: none;
         }
 
-        /* 3. SCROLL PROGRESS (GOLD THREAD) */
+        /* 3. SCROLL PROGRESS */
         #scroll-thread {
             position: fixed; top: 0; left: 0; width: 0%; height: 1px;
             background: var(--royal-gold); z-index: 2001;
@@ -90,9 +89,14 @@
 
         .brand-text {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 200; font-size: 0.7rem;
-            letter-spacing: 15px; text-transform: uppercase;
-            color: #fcf6ba; margin-bottom: 25px; display: block;
+            font-weight: 300; 
+            /* INCREASED FONT SIZE */
+            font-size: clamp(0.8rem, 2vw, 1.1rem); 
+            letter-spacing: clamp(10px, 2vw, 20px); 
+            text-transform: uppercase; 
+            color: #fcf6ba; 
+            margin-bottom: 25px; 
+            display: block;
             text-shadow: 0 0 10px rgba(191, 149, 63, 0.4);
         }
 
@@ -122,9 +126,9 @@
             transition: var(--transition-smooth);
             transform-style: preserve-3d;
             box-shadow: 0 40px 80px rgba(0,0,0,0.9);
+            cursor: pointer;
         }
 
-        /* CARD SWEEP LIGHTING EFFECT */
         .aura-card::after {
             content: ""; position: absolute; inset: 0;
             background: linear-gradient(125deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
@@ -156,7 +160,7 @@
         .card-label {
             position: absolute; bottom: 0; width: 100%; padding: 60px 20px;
             text-align: center; background: linear-gradient(transparent, rgba(0,0,0,1));
-            font-family: 'Cinzel', serif; font-size: 1.4rem; letter-spacing: 12px; color: #fff;
+            font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 12px; color: #fff;
             z-index: 15;
         }
 
@@ -164,14 +168,15 @@
         #reveal-portal {
             display: none; position: fixed; inset: 0;
             z-index: 3000; align-items: center; justify-content: center;
-            background: #000; padding: 20px; opacity: 0; 
+            background: rgba(0,0,0,0.95); padding: 20px; opacity: 0; 
             transition: opacity 1s ease;
+            backdrop-filter: blur(10px);
         }
 
         .imperial-chamber {
             width: 100%; max-width: 800px;
             text-align: center; position: relative;
-            padding: 80px 30px;
+            padding: 60px 30px;
             border: 1px solid rgba(191, 149, 63, 0.2);
             background: radial-gradient(circle at center, #080808 0%, #000 100%);
             box-shadow: 0 0 100px rgba(191, 149, 63, 0.1);
@@ -179,8 +184,10 @@
         }
 
         .aura-result {
-            font-size: clamp(1.4rem, 5vw, 2.8rem); font-weight: 400; font-style: italic;
-            margin-bottom: 60px; color: #fff; line-height: 1.5;
+            /* DECREASED AURA TEXT SIZE */
+            font-size: clamp(1.1rem, 4vw, 1.8rem); 
+            font-weight: 400; font-style: italic;
+            margin-bottom: 50px; color: #fff; line-height: 1.6;
             background: linear-gradient(to bottom, #fff, #b38728);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             text-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -188,21 +195,21 @@
 
         /* 8. CTA ELEMENTS */
         .btn-zenith {
-            display: inline-block; padding: 24px 60px;
+            display: inline-block; padding: 20px 40px;
             background: var(--royal-gold); color: #000 !important;
             text-decoration: none; font-family: 'Cinzel', serif;
-            font-weight: 900; font-size: 0.9rem; letter-spacing: 8px;
+            font-weight: 900; font-size: 0.8rem; letter-spacing: 5px;
             text-transform: uppercase; transition: 0.5s;
             position: relative; overflow: hidden;
         }
 
         .btn-zenith:hover {
-            transform: scale(1.05); letter-spacing: 12px;
+            transform: scale(1.05); letter-spacing: 8px;
             background: #fff;
         }
 
         .reroll {
-            margin-top: 60px; background: none; border: none;
+            margin-top: 40px; background: none; border: none;
             color: rgba(255, 255, 255, 0.25); font-family: 'Montserrat', sans-serif;
             text-transform: uppercase; letter-spacing: 6px; font-size: 0.6rem;
             cursor: pointer; transition: 0.4s;
@@ -221,16 +228,10 @@
             to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
-        /* 10. MOBILE SOPHISTICATION */
         @media (max-width: 768px) {
-            .zenith-wrapper { padding-top: 80px; }
-            .aura-card { width: 88vw; height: 135vw; border-width: 0.5px; }
-            .main-title { letter-spacing: 5px; }
-            .brand-text { letter-spacing: 8px; font-size: 0.6rem; }
-            .aura-card:hover { transform: translateY(-10px); }
-            /* Disable heavy effects on low-power mobile */
-            .particles { display: none; }
-            #reveal-portal { backdrop-filter: none; }
+            .brand-text { font-size: 0.8rem; letter-spacing: 6px; }
+            .aura-result { font-size: 1.2rem; }
+            .aura-card { width: 88vw; height: 130vw; }
         }
     </style>
 </head>
@@ -263,7 +264,7 @@
         <div id="reveal-portal">
             <div class="imperial-chamber">
                 <div id="aura-text" class="aura-result">Inhaling your soul essence...</div>
-                <a href="https://linktr.ee/ayrafragrances" class="btn-zenith">ENTER THE FRAGRANCE WONDERLAND</a>
+                <a href="https://linktr.ee/ayrafragrances" class="btn-zenith">ENTER THE WONDERLAND</a>
                 <br>
                 <button class="reroll" onclick="window.location.reload()">REDEFINE DESTINY</button>
             </div>
@@ -300,25 +301,14 @@
                 });
         }
 
-        // 3. LOW-OVERHEAD PARALLAX (Only for Desktop/High Performance)
+        // 3. LOW-OVERHEAD PARALLAX
         if (window.matchMedia("(pointer: fine)").matches) {
             document.addEventListener('mousemove', (e) => {
                 const x = (window.innerWidth / 2 - e.pageX) / 80;
                 const y = (window.innerHeight / 2 - e.pageY) / 80;
-                // Move background slightly
                 document.getElementById('bgEngine').style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
             });
         }
-
-        // 4. PREVENT OVER-SCROLL ON MOBILE
-        document.addEventListener('touchmove', function(e) {
-            if (e.target.closest('#reveal-portal')) {
-                // Allow scrolling only inside modal if needed
-            } else {
-                // standard scroll
-            }
-        }, { passive: true });
     </script>
 </body>
 </html>
-
