@@ -5,153 +5,237 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AYRA | The Imperial Aura</title>
     <style>
-        /* AYRA FRAGRANCES - IMPERIAL ENGINE V3.1 
-           Aesthetic: Minimalist, Old Money, Quiet Luxury
+        /* AYRA FRAGRANCES - KINETIC SMOKE ENGINE V5.0 
+           Concept: Old Money / Quiet Luxury / High-End Niche
         */
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,600;0,900;1,500&family=Montserrat:wght@200;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,900;1,600&family=Montserrat:wght@200;400;600&display=swap');
 
         :root {
             --royal-gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
             --gold-soft: #d4af37;
-            --Deep-Wine: #1a0505;
-            --glass-gold: rgba(191, 149, 63, 0.15);
-            --transition-smooth: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            --smoke-color: rgba(255, 255, 255, 0.08);
+            --transition-ultra: 1.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* 1. ARCHITECTURAL BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         
         body, html { 
             width: 100%; height: 100%; 
-            background-color: var(--Deep-Wine);
+            background-color: #000;
             color: #fff;
             font-family: 'Playfair Display', serif;
-            overflow-x: hidden;
+            overflow: hidden; /* Canvas handles the depth */
+        }
+
+        /* 2. SMOKE & ATMOSPHERE ENGINE */
+        #smoke-canvas {
+            position: fixed; inset: 0;
+            z-index: 1; pointer-events: none;
+            filter: blur(4px);
         }
 
         .background-engine {
-            position: fixed; inset: -5%; width: 110%; height: 110%;
+            position: fixed; inset: -15%; width: 130%; height: 130%;
             z-index: -2;
             background-image: url('https://i.postimg.cc/05mRcfNq/Untitled-design.png');
             background-size: cover; background-position: center;
-            filter: brightness(0.2);
+            filter: brightness(0.35) contrast(1.1);
+            transform: scale(1.1);
+            animation: bgFlicker 8s infinite alternate;
+            will-change: transform;
         }
 
         .divine-vignette {
-            position: fixed; inset: 0; z-index: 0;
+            position: fixed; inset: 0; z-index: -1;
             background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.9) 100%);
-            pointer-events: none;
         }
 
+        /* 3. SCROLL & PROGRESS */
+        #scroll-thread {
+            position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+            background: var(--royal-gold); z-index: 2001;
+            box-shadow: 0 0 20px rgba(191, 149, 63, 0.8);
+        }
+
+        /* 4. LAYOUT WRAPPER */
         .zenith-wrapper {
-            width: 100%; min-height: 100vh;
+            position: relative; width: 100%; height: 100vh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 40px 20px; position: relative; z-index: 10;
+            z-index: 10; padding: 40px;
         }
 
-        .imperial-header { text-align: center; margin-bottom: 60px; }
+        /* 5. IMPERIAL BRANDING */
+        .imperial-header {
+            text-align: center; margin-bottom: 8vh;
+            opacity: 0; transform: translateY(40px);
+            animation: revealEntrance 2.5s var(--transition-ultra) forwards;
+        }
 
         .brand-text {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(0.9rem, 2vw, 1.2rem); 
-            letter-spacing: 12px; text-transform: uppercase; 
-            color: #fcf6ba; margin-bottom: 15px; display: block;
+            font-size: clamp(0.8rem, 1.5vw, 1.1rem); 
+            letter-spacing: 18px; text-transform: uppercase; 
+            color: #fcf6ba; margin-bottom: 25px; display: block;
+            opacity: 0.8;
         }
 
         .main-title {
             font-family: 'Cinzel', serif; 
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
-            font-weight: 900; letter-spacing: 8px;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 900; letter-spacing: 15px;
             background: var(--royal-gold); 
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.9));
         }
 
+        /* 6. ULTRA-ENGAGING CARDS */
         .aura-grid {
-            display: flex; gap: 40px; flex-wrap: wrap; justify-content: center;
-            width: 100%; max-width: 1000px;
+            display: flex; gap: 60px; flex-wrap: wrap; justify-content: center;
+            perspective: 3000px; width: 100%;
         }
 
         .aura-card {
-            width: 320px; height: 480px;
+            width: clamp(280px, 25vw, 380px); 
+            height: clamp(420px, 40vw, 560px);
             position: relative; overflow: hidden;
-            border: 1px solid rgba(191, 149, 63, 0.2);
-            transition: var(--transition-smooth);
+            background: #000; border: 1px solid rgba(191, 149, 63, 0.1);
+            transition: var(--transition-ultra);
+            transform-style: preserve-3d;
+            box-shadow: 0 60px 100px rgba(0,0,0,0.9);
             cursor: pointer;
         }
 
-        .aura-card:hover { transform: translateY(-10px); border-color: #fcf6ba; }
+        /* The Internal "Shine" Light that follows mouse */
+        .aura-card::before {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at var(--x) var(--y), rgba(255,255,255,0.15) 0%, transparent 60%);
+            z-index: 5; opacity: 0; transition: opacity 0.5s;
+        }
+
+        .aura-card:hover {
+            transform: translateY(-40px) rotateX(12deg) rotateY(-12deg);
+            border-color: #fcf6ba;
+            box-shadow: 0 90px 180px rgba(191, 149, 63, 0.3);
+        }
+
+        .aura-card:hover::before { opacity: 1; }
 
         .card-media {
             width: 100%; height: 100%; background-size: cover; background-position: center;
-            opacity: 0.5; transition: 1.5s var(--transition-smooth);
+            opacity: 0.4; transition: 3s var(--transition-ultra);
+            filter: contrast(1.1) brightness(0.8);
         }
 
-        .aura-card:hover .card-media { opacity: 0.9; transform: scale(1.05); }
+        .aura-card:hover .card-media {
+            opacity: 1; transform: scale(1.2); filter: contrast(1.2) brightness(1.1);
+        }
 
         .female-bg { background-image: url('https://i.postimg.cc/g01369tz/Gemini-Generated-Image-usj8m5usj8m5usj8.png'); }
         .male-bg { background-image: url('https://i.postimg.cc/Pf6cnWb8/Gemini_Generated_Image_z4wx9bz4wx9bz4wx.png'); }
 
         .card-label {
-            position: absolute; bottom: 0; width: 100%; padding: 30px;
-            text-align: center; background: linear-gradient(transparent, #000);
-            font-family: 'Cinzel', serif; letter-spacing: 6px; font-size: 1rem;
+            position: absolute; bottom: 0; width: 100%; padding: 50px 20px;
+            text-align: center; background: linear-gradient(transparent, #000 85%);
+            font-family: 'Cinzel', serif; letter-spacing: 12px; font-size: 1.2rem;
+            z-index: 10; text-shadow: 0 0 15px rgba(0,0,0,1);
         }
 
+        /* 7. REVEAL PORTAL & LIVELY MESSAGE SCREEN */
         #reveal-portal {
             display: none; position: fixed; inset: 0;
             z-index: 3000; align-items: center; justify-content: center;
-            background: rgba(0,0,0,0.95); backdrop-filter: blur(15px);
-            opacity: 0; transition: opacity 0.8s ease;
+            background: rgba(0,0,0,0.99); backdrop-filter: blur(40px);
+            opacity: 0; transition: opacity 1.5s ease;
         }
 
         .imperial-chamber {
-            width: 90%; max-width: 600px; text-align: center;
-            padding: 50px 20px; border: 1px solid rgba(191, 149, 63, 0.3);
-            background: #000; box-shadow: 0 0 50px rgba(191, 149, 63, 0.1);
+            width: 95%; max-width: 850px; text-align: center;
+            padding: 120px 60px; border: 1px solid rgba(191, 149, 63, 0.2);
+            background: radial-gradient(circle at center, #0a0a0a, #000);
+            box-shadow: 0 0 150px rgba(191, 149, 63, 0.2);
+            position: relative; overflow: hidden;
+        }
+
+        /* Message Screen Particle Effect */
+        .imperial-chamber::after {
+            content: ''; position: absolute; inset: 0;
+            background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+            background-size: 50px 50px; opacity: 0.03; animation: starFlow 20s linear infinite;
         }
 
         .aura-result {
-            font-size: 1.4rem; font-style: italic; margin-bottom: 40px;
-            color: #fff; line-height: 1.6;
+            font-size: clamp(1.5rem, 5vw, 2.5rem); 
+            font-weight: 600; font-style: italic; margin-bottom: 80px;
+            color: #fff; line-height: 1.8;
+            background: linear-gradient(to bottom, #fff 30%, #bf953f 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+            animation: messagePulse 3s infinite alternate ease-in-out;
         }
 
+        /* 8. ZENITH BUTTON ANIMATIONS */
         .btn-zenith {
-            display: inline-block; padding: 18px 35px;
-            background: var(--royal-gold); color: #000;
-            font-family: 'Cinzel', serif; font-weight: 700;
-            text-decoration: none; letter-spacing: 3px;
-            transition: 0.4s;
+            display: inline-block; padding: 25px 60px;
+            background: var(--royal-gold); color: #000 !important;
+            font-family: 'Cinzel', serif; font-weight: 900;
+            text-decoration: none; letter-spacing: 8px;
+            position: relative; z-index: 5;
+            transition: 0.8s var(--transition-ultra);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .btn-zenith:hover {
+            transform: scale(1.1) translateY(-8px);
+            letter-spacing: 12px;
+            box-shadow: 0 30px 60px rgba(191, 149, 63, 0.4);
         }
 
         .reroll {
-            margin-top: 30px; background: none; border: none;
-            color: rgba(255,255,255,0.4); letter-spacing: 4px;
-            cursor: pointer; text-transform: uppercase; font-size: 0.7rem;
+            margin-top: 60px; background: none; border: none;
+            color: rgba(255,255,255,0.25); letter-spacing: 10px;
+            cursor: pointer; text-transform: uppercase; font-size: 0.8rem;
+            transition: 0.5s;
         }
 
+        .reroll:hover { color: #fff; letter-spacing: 14px; }
+
+        /* 9. ANIMATION LIBRARY */
+        @keyframes revealEntrance { to { opacity: 1; transform: translateY(0); } }
+        @keyframes bgFlicker { 
+            0% { opacity: 0.95; filter: brightness(0.35) contrast(1.1); }
+            100% { opacity: 1; filter: brightness(0.45) contrast(1.15); }
+        }
+        @keyframes starFlow { from { transform: translateY(0); } to { transform: translateY(-500px); } }
+        @keyframes messagePulse { from { transform: scale(1); } to { transform: scale(1.02); } }
+
         @media (max-width: 768px) {
-            .aura-card { width: 80vw; height: 110vw; }
-            .brand-text { letter-spacing: 6px; }
+            .aura-card { width: 85vw; height: 120vw; }
+            .aura-grid { gap: 30px; }
+            .imperial-header { margin-bottom: 40px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="background-engine"></div>
+    <canvas id="smoke-canvas"></canvas>
+    <div class="background-engine" id="bgEngine"></div>
     <div class="divine-vignette"></div>
+    <div id="scroll-thread"></div>
 
     <div class="zenith-wrapper">
         <header class="imperial-header">
             <span class="brand-text">AYRA FRAGRANCES</span>
-            <h1 class="main-title">DISCOVER YOUR AURA</h1>
+            <h1 class="main-title">DISCOVER YOUR<br>AURA</h1>
         </header>
 
         <main class="aura-grid">
-            <div class="aura-card" onclick="fetchAura('female')">
+            <div class="aura-card" onclick="fetchAura('female')" onmousemove="cardGlow(event, this)">
                 <div class="card-media female-bg"></div>
                 <div class="card-label">FEMININE</div>
             </div>
 
-            <div class="aura-card" onclick="fetchAura('male')">
+            <div class="aura-card" onclick="fetchAura('male')" onmousemove="cardGlow(event, this)">
                 <div class="card-media male-bg"></div>
                 <div class="card-label">MASCULINE</div>
             </div>
@@ -160,7 +244,7 @@
         <div id="reveal-portal">
             <div class="imperial-chamber">
                 <div id="aura-text" class="aura-result">Inhaling your soul essence...</div>
-                <a href="https://linktr.ee/ayrafragrances" class="btn-zenith">ENTER THE FRAGRANCE WONDERLAND</a>
+                <a href="https://linktr.ee/ayrafragrances" class="btn-zenith">ENTER THE WONDERLAND</a>
                 <br>
                 <button class="reroll" onclick="window.location.reload()">REDEFINE AURA</button>
             </div>
@@ -168,22 +252,93 @@
     </div>
 
     <script>
+        // 1. DYNAMIC CARD GLOW SCRIPT
+        function cardGlow(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
+        }
+
+        // 2. KINETIC PARALLAX
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 30;
+            const y = (window.innerHeight / 2 - e.pageY) / 30;
+            document.getElementById('bgEngine').style.transform = `translate(${x}px, ${y}px) scale(1.15)`;
+        });
+
+        // 3. FRAGRANCE SMOKE ENGINE (Canvas API)
+        const canvas = document.getElementById('smoke-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.size = Math.random() * 80 + 40;
+                this.speedY = Math.random() * 0.5 + 0.2;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.3;
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.opacity > 0.005) this.opacity -= 0.001;
+                if (this.y < -100) {
+                    this.y = canvas.height + 100;
+                    this.x = Math.random() * canvas.width;
+                    this.opacity = Math.random() * 0.3;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initSmoke() {
+            particles = [];
+            for (let i = 0; i < 40; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateSmoke() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateSmoke);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        initSmoke();
+        animateSmoke();
+
+        // 4. DATA FETCH ENGINE
         const scriptURL = "https://script.google.com/macros/s/AKfycbzwQhPG0UFW-6yIVnwgcqq2bvoSFnvYTKhkxSnHCHkFBjk4AtXC7ibfFJNsc5LTSFPy/exec";
 
         function fetchAura(gender) {
             const portal = document.getElementById('reveal-portal');
             const output = document.getElementById('aura-text');
-            
-            // 1. Show the loading screen immediately
             output.innerText = "Inhaling your soul essence...";
             portal.style.display = 'flex';
             setTimeout(() => portal.style.opacity = '1', 50);
 
-            // 2. Fetch data in the background
             fetch(`${scriptURL}?gender=${gender}`)
                 .then(r => r.text())
                 .then(data => { 
-                    // 3. Only replace the text when the data arrives
                     output.innerText = `"${data}"`; 
                 })
                 .catch(err => {
