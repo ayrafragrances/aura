@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AYRA | The Imperial Aura</title>
     <style>
-        /* AYRA FRAGRANCES - IMPERIAL ENGINE V3.1 
-           ADJUSTMENTS: Desktop sizing preserved. Mobile cards refined for elegance.
-        */
+        /* AYRA FRAGRANCES - IMPERIAL ENGINE V3.1 */
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,600;0,900;1,500&family=Montserrat:wght@200;400;500&display=swap');
 
         :root {
@@ -163,7 +161,7 @@
             z-index: 15;
         }
 
-        /* 7. REVEAL PORTAL & SCROLL REVEAL ENGINE */
+        /* 7. REVEAL PORTAL & SCROLL ENGINE */
         #reveal-portal {
             display: none; position: fixed; inset: 0;
             z-index: 3000; align-items: center; justify-content: center;
@@ -173,116 +171,82 @@
         }
 
         .imperial-chamber {
-            width: 100%; max-width: 800px;
+            width: 100%; max-width: 600px;
             text-align: center; position: relative;
-            padding: 60px 30px;
-            border: 1px solid rgba(191, 149, 63, 0.2);
-            background: radial-gradient(circle at center, #080808 0%, #000 100%);
-            box-shadow: 0 0 100px rgba(191, 149, 63, 0.1);
-            animation: chamberScale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* LOADING MESSAGE */
+        #loading-message {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
+            letter-spacing: 4px;
+            color: #fcf6ba;
+            font-style: italic;
+            margin-bottom: 20px;
+            display: block;
+            animation: pulseFade 1.5s infinite alternate;
+        }
+
+        /* PHYSICAL SCROLL PAPER */
+        .scroll-paper {
+            position: relative;
+            width: 100%;
+            margin: 0 auto 40px auto;
+            background: #f4e4bc;
+            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            overflow: hidden;
+            display: none; /* Hidden until data loads */
+            clip-path: inset(100% 0 0 0); /* Start from bottom */
+            transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-paper.unrolled {
+            display: block;
+            clip-path: inset(0% 0 0 0);
+        }
+
+        .scroll-roller {
+            position: absolute;
+            left: -2%; width: 104%; height: 10px;
+            background: var(--royal-gold);
+            bottom: 0;
+            z-index: 20;
+            border-radius: 5px;
         }
 
         .aura-result {
-            font-size: clamp(1.1rem, 4vw, 1.8rem); 
-            font-weight: 400; font-style: italic;
-            margin-bottom: 50px; color: #fff; line-height: 1.6;
-            background: linear-gradient(to bottom, #fff, #b38728);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            
-            /* SCROLL REVEAL LOGIC */
-            position: relative;
-            display: inline-block;
-            clip-path: inset(100% 0 0 0); /* Hidden at bottom */
-        }
-
-        /* Class applied via JS when data arrives */
-        .aura-result.unroll-animation {
-            animation: unrollMessage 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        /* The horizontal scroll "rod" */
-        .aura-result::after {
-            content: "";
-            position: absolute;
-            left: -10%; right: -10%;
-            height: 2px;
-            background: var(--royal-gold);
-            bottom: 0;
-            opacity: 0;
-        }
-
-        .aura-result.unroll-animation::after {
-            animation: rollerBarMove 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            padding: 50px 25px;
+            font-size: clamp(1.1rem, 4vw, 1.6rem); 
+            font-weight: 600; font-style: italic;
+            color: #1a1a1a; 
+            line-height: 1.6;
         }
 
         /* 8. ZENITH BUTTONS */
         .btn-zenith {
-            display: inline-block; 
-            padding: 20px 40px;
-            background: var(--royal-gold); 
-            color: #000 !important;
-            text-decoration: none; 
-            font-family: 'Cinzel', serif;
-            font-weight: 900; 
-            font-size: 0.8rem; 
-            letter-spacing: 5px;
-            text-transform: uppercase; 
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; 
-            overflow: hidden;
-            border: 1px solid transparent;
+            display: inline-block; padding: 18px 36px;
+            background: var(--royal-gold); color: #000 !important;
+            text-decoration: none; font-family: 'Cinzel', serif;
+            font-weight: 900; font-size: 0.8rem; letter-spacing: 5px;
+            text-transform: uppercase; transition: 0.5s;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        .btn-zenith:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(191, 149, 63, 0.4);
-            letter-spacing: 7px;
-            filter: brightness(1.1);
-        }
-
-        .btn-zenith::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
-            transform: skewX(-25deg);
-        }
-
-        .btn-zenith:hover::before { animation: imperialShine 0.8s forwards; }
-
         .reroll {
-            margin-top: 40px; background: none; border: none;
-            color: rgba(255, 255, 255, 0.25); font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase; letter-spacing: 6px; font-size: 0.6rem;
-            cursor: pointer; transition: 0.4s;
+            margin-top: 30px; background: none; border: none;
+            color: rgba(255, 255, 255, 0.4); font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase; letter-spacing: 5px; font-size: 0.6rem;
+            cursor: pointer;
         }
 
-        /* 9. KEYFRAME LIBRARY */
-        @keyframes unrollMessage {
-            0% { clip-path: inset(100% 0 0 0); }
-            100% { clip-path: inset(0% 0 0 0); }
-        }
-
-        @keyframes rollerBarMove {
-            0% { bottom: 0; opacity: 1; }
-            100% { bottom: 100%; opacity: 0; }
-        }
-
-        @keyframes lightPulse { 0% { opacity: 0.3; } 100% { opacity: 0.7; } }
+        @keyframes pulseFade { from { opacity: 0.3; } to { opacity: 1; } }
         @keyframes revealEntrance { to { opacity: 1; transform: translateY(0); } }
-        @keyframes chamberScale {
-            from { transform: scale(0.95) translateY(20px); opacity: 0; }
-            to { transform: scale(1) translateY(0); opacity: 1; }
-        }
-        @keyframes imperialShine { 100% { left: 125%; } }
+        @keyframes lightPulse { 0% { opacity: 0.3; } 100% { opacity: 0.7; } }
 
-        /* MOBILE REFINEMENT */
         @media (max-width: 768px) {
             .brand-text { font-size: 0.9rem; letter-spacing: 6px; }
-            .main-title { font-size: 1.3rem; letter-spacing: 4px; }
-            .aura-card { width: 70vw; height: 100vw; margin-bottom: 20px; }
-            .card-label { padding: 40px 15px; font-size: 0.9rem; letter-spacing: 8px; }
-            .aura-grid { gap: 30px; }
+            .aura-card { width: 75vw; height: 110vw; }
         }
     </style>
 </head>
@@ -305,7 +269,6 @@
                 <div class="card-media female-bg"></div>
                 <div class="card-label">FEMININE</div>
             </div>
-
             <div class="aura-card" onclick="fetchAura('male')">
                 <div class="card-media male-bg"></div>
                 <div class="card-label">MASCULINE</div>
@@ -314,8 +277,13 @@
 
         <div id="reveal-portal">
             <div class="imperial-chamber">
-                <div id="aura-text" class="aura-result">Inhaling your soul essence. Please wait...</div>
-                <br>
+                <div id="loading-message">Inhaling your soul essence. Please wait...</div>
+                
+                <div class="scroll-paper" id="paper-element">
+                    <div class="scroll-roller"></div>
+                    <div id="aura-text" class="aura-result"></div>
+                </div>
+
                 <a href="https://linktr.ee/ayrafragrances" class="btn-zenith">ENTER THE FRAGRANCE WONDERLAND</a>
                 <br>
                 <button class="reroll" onclick="window.location.reload()">REDEFINE YOUR AURA HERE</button>
@@ -337,22 +305,26 @@
         function fetchAura(gender) {
             const portal = document.getElementById('reveal-portal');
             const output = document.getElementById('aura-text');
+            const loading = document.getElementById('loading-message');
+            const paper = document.getElementById('paper-element');
+            
             portal.style.display = 'flex';
             setTimeout(() => portal.style.opacity = '1', 50);
 
-            // Remove previous animation class if user is re-trying
-            output.classList.remove('unroll-animation');
-
+            // Fetch Data
             fetch(`${scriptURL}?gender=${gender}`)
                 .then(r => r.text())
                 .then(data => { 
-                    output.innerText = `"${data}"`; 
-                    // Fast unroll trigger
-                    output.classList.add('unroll-animation');
+                    loading.style.display = 'none'; // Hide loading
+                    output.innerText = `"${data}"`; // Set text
+                    paper.style.display = 'block'; // Prepare paper
+                    setTimeout(() => paper.classList.add('unrolled'), 50); // Unroll
                 })
                 .catch(err => {
+                    loading.style.display = 'none';
                     output.innerText = "THE VOID IS SILENT. REFRESH.";
-                    output.classList.add('unroll-animation');
+                    paper.style.display = 'block';
+                    paper.classList.add('unrolled');
                 });
         }
 
