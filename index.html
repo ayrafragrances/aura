@@ -154,6 +154,7 @@
         }
 
         .female-bg { background-image: url('https://i.postimg.cc/g01369tz/Gemini-Generated-Image-usj8m5usj8m5usj8.png'); }
+        /* FIXED: Correct Masculine Link Restored */
         .male-bg { background-image: url('https://i.postimg.cc/Pf6cnWb8/Gemini_Generated_Image_z4wx9bz4wx9bz4wx.png'); }
 
         .card-label {
@@ -217,7 +218,6 @@
             filter: brightness(1.1);
         }
 
-        /* The Shimmer Element */
         .btn-zenith::before {
             content: '';
             position: absolute;
@@ -300,7 +300,7 @@
             </div>
 
             <div class="aura-card" onclick="fetchAura('male')">
-                <div class="card-media male-bg)</div>
+                <div class="card-media male-bg"></div>
                 <div class="card-label">MASCULINE</div>
             </div>
         </main>
@@ -320,7 +320,8 @@
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
-            document.getElementById("scroll-thread").style.width = scrolled + "%";
+            const thread = document.getElementById("scroll-thread");
+            if(thread) thread.style.width = scrolled + "%";
         });
 
         const scriptURL = "https://script.google.com/macros/s/AKfycbzwQhPG0UFW-6yIVnwgcqq2bvoSFnvYTKhkxSnHCHkFBjk4AtXC7ibfFJNsc5LTSFPy/exec";
@@ -349,4 +350,3 @@
     </script>
 </body>
 </html>
-
